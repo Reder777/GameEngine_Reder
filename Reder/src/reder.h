@@ -2,7 +2,7 @@
 
 
 #include "reder/application.h"
-
+#include "reder/log.h"
 
 
 //-------------------entry--------------------//

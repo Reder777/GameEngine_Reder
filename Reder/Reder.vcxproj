@@ -61,6 +61,7 @@
       <ConformanceMode>true</ConformanceMode>
       <SuppressStartupBanner>false</SuppressStartupBanner>
       <AdditionalOptions />
+      <AdditionalIncludeDirectories>$(SolutionDir)Reder\modules\spdlog\include;</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -82,6 +83,7 @@
       <ConformanceMode>true</ConformanceMode>
       <SuppressStartupBanner>false</SuppressStartupBanner>
       <AdditionalOptions />
+      <AdditionalIncludeDirectories>$(SolutionDir)Reder\modules\spdlog\include;</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -96,12 +98,14 @@
     </BuildLog>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="src\reder\log.h" />
     <ClInclude Include="src\reder\core.h" />
     <ClInclude Include="src\reder\application.h" />
     <ClInclude Include="src\reder.h" />
     <ClInclude Include="src\reder\entryPoint.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\reder\log.cpp" />
     <ClCompile Include="src\reder\application.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
