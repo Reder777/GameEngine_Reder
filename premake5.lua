@@ -24,6 +24,7 @@ project "Reder"
         "%{prj.name}/src/**.cpp"
     }
     includedirs{
+        "%{prj.name}/src",
         "%{prj.name}/modules/spdlog/include"
     }
     filter "system:Windows"

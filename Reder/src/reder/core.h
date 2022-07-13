@@ -9,3 +9,4 @@
 	#error reder only supports windows! located in core.h
 #endif
 
+#define BIT(x) (1 << x)
