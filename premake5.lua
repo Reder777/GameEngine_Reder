@@ -23,6 +23,8 @@ project "Reder"
         "%{prj.name}/src/**.h",
         "%{prj.name}/src/**.cpp"
     }
+    pchheader "repch.h"
+    pchsource "Reder/src/repch.cpp"
     includedirs{
         "%{prj.name}/src",
         "%{prj.name}/modules/spdlog/include"

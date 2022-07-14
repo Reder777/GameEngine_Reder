@@ -37,6 +37,7 @@
     <ClInclude Include="src\reder\log.h">
       <Filter>reder</Filter>
     </ClInclude>
+    <ClInclude Include="src\repch.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\reder\application.cpp">
@@ -45,5 +46,6 @@
     <ClCompile Include="src\reder\log.cpp">
       <Filter>reder</Filter>
     </ClCompile>
+    <ClCompile Include="src\repch.cpp" />
   </ItemGroup>
 </Project>

@@ -2,11 +2,8 @@
 
 #include "event.h"
 
-#include <sstream>
 
-/*
-		AppTick, AppUpdate, AppRender
-*/
+
 namespace reder {
 
 	class DLL_API appTick :public event {

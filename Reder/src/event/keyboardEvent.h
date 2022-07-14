@@ -2,7 +2,6 @@
 
 
 #include "event.h"
-#include <sstream>
 
 namespace reder {
 	class DLL_API keyboardEvent :public event {

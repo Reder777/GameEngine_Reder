@@ -3,7 +3,10 @@
 
 extern reder::application* reder::createSandbox();
 
-
+/*
+this is the only entry main function in all files
+different apps defines different action all according to the main function 
+*/
 int main(int argc, char** argv) {
 	reder::log::init();
 	RE_CORE_INFO("this is first info!");

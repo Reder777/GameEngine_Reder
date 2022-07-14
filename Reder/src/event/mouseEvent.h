@@ -1,7 +1,7 @@
 #pragma once
 
 #include "event.h"
-#include <sstream>
+
 
 namespace reder {
 	class DLL_API mouseMovedEvent :public event {

@@ -3,9 +3,17 @@
 #include "core.h"
 #include "spdlog/spdlog.h"
 #include "spdlog/fmt/ostr.h"
-#include <memory>
 
 
+/*
+this file encapsulates some spdlog log function 
+and creates two logger
+corelogger for engine use
+clientlogger for app use
+more information please visit spdlog in github
+ref:https://github.com/gabime/spdlog
+
+*/
 
 namespace reder {
 
@@ -14,11 +22,11 @@ namespace reder {
 	{
 	public:
 		static void init();
-
+		//get corelogger 
 		inline static std::shared_ptr<spdlog::logger>& getCoreLogger() {
 			return coreLogger;
 		}
-
+		//get clientlogger
 		inline static std::shared_ptr<spdlog::logger>& getClientLogger() {
 			return clientLogger;
 		}
