@@ -4,6 +4,12 @@
     <Filter Include="event">
       <UniqueIdentifier>{071C650F-7330-8DC0-3CB2-3020A88589F1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="platform">
+      <UniqueIdentifier>{4A63C33C-3630-1E48-5F49-0CF04B7553D6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="platform\windows">
+      <UniqueIdentifier>{A44FC440-9048-E392-B97A-C817A5D2C29E}</UniqueIdentifier>
+    </Filter>
     <Filter Include="reder">
       <UniqueIdentifier>{B7024710-2317-6FC1-EC98-1221586C6BF2}</UniqueIdentifier>
     </Filter>
@@ -24,6 +30,9 @@
     <ClInclude Include="src\event\windowEvent.h">
       <Filter>event</Filter>
     </ClInclude>
+    <ClInclude Include="src\platform\windows\windowsWindow.h">
+      <Filter>platform\windows</Filter>
+    </ClInclude>
     <ClInclude Include="src\reder.h" />
     <ClInclude Include="src\reder\application.h">
       <Filter>reder</Filter>
@@ -37,9 +46,15 @@
     <ClInclude Include="src\reder\log.h">
       <Filter>reder</Filter>
     </ClInclude>
+    <ClInclude Include="src\reder\window.h">
+      <Filter>reder</Filter>
+    </ClInclude>
     <ClInclude Include="src\repch.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\platform\windows\windowsWindow.cpp">
+      <Filter>platform\windows</Filter>
+    </ClCompile>
     <ClCompile Include="src\reder\application.cpp">
       <Filter>reder</Filter>
     </ClCompile>

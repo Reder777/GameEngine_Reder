@@ -8,6 +8,11 @@ workspace "Reder"
 
 outputdir= "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
+-- Include directories relative to root folder (solution directory)
+IncludeDir = {}
+IncludeDir["GLFW"] = "Reder/modules/glfw/include"
+
+include "Reder/modules/glfw"
 
 --[[
      ----------------------------project Reder------------------------------------
@@ -27,7 +32,12 @@ project "Reder"
     pchsource "Reder/src/repch.cpp"
     includedirs{
         "%{prj.name}/src",
-        "%{prj.name}/modules/spdlog/include"
+        "%{prj.name}/modules/spdlog/include",
+        "%{IncludeDir.GLFW}"
+    }
+    links{
+        "GLFW",
+        "opengl32.lib"
     }
     filter "system:Windows"
         system("windows")

@@ -7,7 +7,8 @@
 namespace reder {
 
 	application::application() {
-
+		m_Window = std::unique_ptr<window>(window::createWindows());
+		m_Running = true;
 	}
 
 	application::~application() {
@@ -15,17 +16,13 @@ namespace reder {
 	}
 
 	void application::run() {
-		windowResizeEvent e(1280, 720);
-		if (e.isInCategory(EventCategoryApplication))
-		{
-			RE_CLIENT_TRACE(e);
-		}
-		if (e.isInCategory(EventCategoryInput))
-		{
-			RE_CLIENT_TRACE(e);
-		}
+	
 
-		while (true);
+		while (m_Running) {
+			m_Window->onUpdate();
+		}
 		
 	}
+
+
 }
