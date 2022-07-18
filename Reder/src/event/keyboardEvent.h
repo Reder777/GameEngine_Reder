@@ -19,9 +19,7 @@ namespace reder {
 
 	class DLL_API keyPressedEvent :public keyboardEvent {
 	public:
-		keyPressedEvent(int keyCode,int pressCount){
-			r_keyCode = keyCode;
-			r_pressCount = pressCount;
+		keyPressedEvent(int keyCode,int pressCount):keyboardEvent(keyCode), r_pressCount(pressCount) {
 		}
 
 		inline int getPressCount() const {
@@ -39,8 +37,8 @@ namespace reder {
 
 	class DLL_API keyReleasedEvent :public keyboardEvent {
 	public:
-		keyReleasedEvent(int keyCode) {
-			r_keyCode = keyCode;
+		keyReleasedEvent(int keyCode) :keyboardEvent(keyCode){
+			
 		}
 
 		std::string ToString() const override {

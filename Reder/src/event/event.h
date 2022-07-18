@@ -29,14 +29,14 @@ namespace reder {
 #define EVENT_CLASS_TYPE(type) static eventType getStaticType(){return eventType::##type;}\
 							   virtual eventType getEventType() const override { return getStaticType(); } \
 							   virtual const char* getName() const override { return #type; }
-#define EVENT_CLASS_CATEGORY(category) virtual eventCategory getCategoryFlag() const override{return category;}
+#define EVENT_CLASS_CATEGORY(category) virtual int getCategoryFlag() const override{return category;}
 
 	class DLL_API event {
 		friend class eventDispatcher;
 	public:
 		virtual eventType getEventType() const = 0;
 		virtual const char* getName() const = 0;
-		virtual eventCategory getCategoryFlag() const = 0;
+		virtual int getCategoryFlag() const = 0;
 		virtual std::string ToString() const{ return getName(); }
 
 		inline bool isInCategory(eventCategory eventCategory) {
@@ -57,9 +57,9 @@ namespace reder {
 		template<typename T>
 		bool Dispatch(EventFn<T> func)
 		{
-			if (m_Event.GetEventType() == T::GetStaticType())
+			if (m_Event.getEventType() == T::getStaticType())
 			{
-				m_Event.m_Handled = func(*(T*)&m_Event);
+				m_Event.is_Handled = func(*(T*)&m_Event);
 				return true;
 			}
 			return false;
