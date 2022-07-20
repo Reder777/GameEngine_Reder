@@ -13,7 +13,7 @@ precompile header file
 #include <sstream>
 #include <unordered_map>
 #include <unordered_set>
-
+#include <vector>
 
 #ifdef RE_PLATFORM_WINDOWS
 	#include <Windows.h>

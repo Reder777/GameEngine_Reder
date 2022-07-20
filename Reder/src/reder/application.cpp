@@ -19,6 +19,9 @@ namespace reder {
 	void application::run() {
 	
 		while (m_Running) {
+			for (layer* layer : m_layStack) {
+				layer->onUpdate();
+			}
 			m_Window->onUpdate();
 		}
 		
@@ -28,12 +31,28 @@ namespace reder {
 		m_Running = false;
 		return true;
 	}
-
+	/*
+		from the end of the layer stack ,send the events to it and check if handled
+	
+	*/
 	void application::OnEvent(event& e) {
 		eventDispatcher m_eventDispatcher(e);
 		m_eventDispatcher.Dispatch<windowCloseEvent>(std::bind(&application::windowClose,this,std::placeholders::_1));
 		RE_CORE_INFO("{0}", e);
+		for (auto it = m_layStack.end(); it != m_layStack.begin();) {
+			(*--it)->onEvent(e);
+			if (e.getHandled() == true) {
+				break;
+			}
+		}
+
 	}
 
+	void application::popLayer(layer* layer) {
+		m_layStack.popLayer(layer);
+	}
 
+	void application::pushLayer(layer* layer) {
+		m_layStack.pushLayer(layer);
+	}
 }

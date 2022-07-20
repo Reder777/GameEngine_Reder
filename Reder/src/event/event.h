@@ -42,6 +42,8 @@ namespace reder {
 		inline bool isInCategory(eventCategory eventCategory) {
 			return getCategoryFlag() & eventCategory;
 		}
+
+		inline bool getHandled() { return is_Handled; }
 	protected:
 		bool is_Handled = false;
 
