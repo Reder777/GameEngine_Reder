@@ -8,6 +8,8 @@ workspace "Reder"
 
 outputdir= "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
+startproject="Sandbox"
+
 -- Include directories relative to root folder (solution directory)
 IncludeDir = {}
 IncludeDir["GLFW"] = "Reder/modules/glfw/include"
@@ -16,6 +18,8 @@ IncludeDir["IMGUI"] = "Reder/modules/imgui"
 include "Reder/modules/glfw"
 include "Reder/modules/glad"
 include "Reder/modules/imgui"
+
+
 
 --[[
      ----------------------------project Reder------------------------------------
