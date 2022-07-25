@@ -6,6 +6,7 @@
 namespace reder{
 	class DLL_API application
 	{
+		
 	public:
 		application();
 
@@ -30,6 +31,9 @@ namespace reder{
 		bool m_Running = true;
 		layerStack m_layStack;
 
+
+		//singleton 
+		// initialized in application.cpp application() constructor
 		static application* app_Instance;
 	};
 

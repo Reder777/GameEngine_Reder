@@ -63,8 +63,7 @@
       <AdditionalIncludeDirectories>src;modules\spdlog\include;modules\glfw\include;modules\glad\include;modules\imgui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
-      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
-      <AdditionalOptions>/MDd %(AdditionalOptions)</AdditionalOptions>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <LanguageStandard>stdcpp14</LanguageStandard>
     </ClCompile>
     <Link>
@@ -74,7 +73,7 @@
       <ImportLibrary>..\bin\Debug-windows-x86_64\Reder\Reder.lib</ImportLibrary>
     </Link>
     <PostBuildEvent>
-      <Command>IF EXIST ..\bin\Debug-windows-x86_64\Reder\Reder.dll\ (xcopy /Q /E /Y /I ..\bin\Debug-windows-x86_64\Reder\Reder.dll ..\bin\Debug-windows-x86_64\Sandbox &gt; nul) ELSE (xcopy /Q /Y /I ..\bin\Debug-windows-x86_64\Reder\Reder.dll ..\bin\Debug-windows-x86_64\Sandbox &gt; nul)</Command>
+      <Command>IF EXIST ..\bin\Debug-windows-x86_64\Reder\Reder.dll\ (xcopy /Q /E /Y /I ..\bin\Debug-windows-x86_64\Reder\Reder.dll "..\bin\Debug-windows-x86_64\Sandbox\" &gt; nul) ELSE (xcopy /Q /Y /I ..\bin\Debug-windows-x86_64\Reder\Reder.dll "..\bin\Debug-windows-x86_64\Sandbox\" &gt; nul)</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -89,8 +88,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <MinimalRebuild>false</MinimalRebuild>
       <StringPooling>true</StringPooling>
-      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
-      <AdditionalOptions>/MD %(AdditionalOptions)</AdditionalOptions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <LanguageStandard>stdcpp14</LanguageStandard>
     </ClCompile>
     <Link>
@@ -101,7 +99,7 @@
       <ImportLibrary>..\bin\Release-windows-x86_64\Reder\Reder.lib</ImportLibrary>
     </Link>
     <PostBuildEvent>
-      <Command>IF EXIST ..\bin\Release-windows-x86_64\Reder\Reder.dll\ (xcopy /Q /E /Y /I ..\bin\Release-windows-x86_64\Reder\Reder.dll ..\bin\Release-windows-x86_64\Sandbox &gt; nul) ELSE (xcopy /Q /Y /I ..\bin\Release-windows-x86_64\Reder\Reder.dll ..\bin\Release-windows-x86_64\Sandbox &gt; nul)</Command>
+      <Command>IF EXIST ..\bin\Release-windows-x86_64\Reder\Reder.dll\ (xcopy /Q /E /Y /I ..\bin\Release-windows-x86_64\Reder\Reder.dll "..\bin\Release-windows-x86_64\Sandbox\" &gt; nul) ELSE (xcopy /Q /Y /I ..\bin\Release-windows-x86_64\Reder\Reder.dll "..\bin\Release-windows-x86_64\Sandbox\" &gt; nul)</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -117,11 +115,13 @@
     <ClInclude Include="src\reder\event\mouseEvent.h" />
     <ClInclude Include="src\reder\event\windowEvent.h" />
     <ClInclude Include="src\reder\imgui\imguiLayer.h" />
+    <ClInclude Include="src\reder\input.h" />
     <ClInclude Include="src\reder\layer.h" />
     <ClInclude Include="src\reder\layerStack.h" />
     <ClInclude Include="src\reder\log.h" />
     <ClInclude Include="src\reder\window.h" />
     <ClInclude Include="src\repch.h" />
+    <ClInclude Include="src\platform\windows\windowsInput.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\platform\openGL\imguiOpenGL.cpp" />
@@ -134,6 +134,7 @@
     <ClCompile Include="src\repch.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="src\platform\windows\windowsInput.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="modules\glfw\GLFW.vcxproj">

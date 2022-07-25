@@ -21,6 +21,7 @@ namespace reder {
 		void setVSync(bool enabled) override;
 		bool isVSync()const override;
 		void onUpdate() override;
+		inline virtual void* getGlfwWindow() const override{ return glfwWindow; }
 
 	private:
 		virtual void init(const windowProp& windowsProp);

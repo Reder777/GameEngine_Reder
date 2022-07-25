@@ -68,6 +68,8 @@
       <Filter>reder</Filter>
     </ClInclude>
     <ClInclude Include="src\repch.h" />
+    <ClInclude Include="src\reder\input.h" />
+    <ClInclude Include="src\platform\windows\windowsInput.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\platform\openGL\imguiOpenGL.cpp">
@@ -92,5 +94,6 @@
       <Filter>reder</Filter>
     </ClCompile>
     <ClCompile Include="src\repch.cpp" />
+    <ClCompile Include="src\platform\windows\windowsInput.cpp" />
   </ItemGroup>
 </Project>

@@ -28,6 +28,7 @@ project "Reder"
     location "Reder"
     kind "SharedLib"
     language "C++"
+    staticruntime "off"
     targetdir ("bin/" .. outputdir .. "/%{prj.name}")
     objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
 
@@ -53,7 +54,6 @@ project "Reder"
     filter "system:Windows"
         system("windows")
         cppdialect "C++14"
-        staticruntime "On"
         systemversion "10.0"
         defines{
             "RE_PLATFORM_WINDOWS",
@@ -62,16 +62,16 @@ project "Reder"
         }
 
         postbuildcommands{
-            ("{COPY} %{cfg.buildtarget.relpath} ../bin/"..outputdir.."/Sandbox")
+            ("{COPY} %{cfg.buildtarget.relpath} \"../bin/"..outputdir.."/Sandbox/\"")
         }
     filter "configurations:Debug"
         defines {"RE_DEBUG"}
-        buildoptions "/MDd"
+        runtime "Debug"
         symbols "On"
 
     filter "configurations:Release"
         defines {"RE_RELEASE"}
-        buildoptions "/MD"
+        runtime "Release"
         optimize "On"
 
 --[[
@@ -82,6 +82,7 @@ project "Sandbox"
     location "Sandbox"
     kind "ConsoleApp"
     language "C++"
+    staticruntime "off"
     targetdir ("bin/" .. outputdir .. "/%{prj.name}")
     objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
 
@@ -99,7 +100,6 @@ project "Sandbox"
     filter "system:Windows"
         system("windows")
         cppdialect "C++14"
-        staticruntime "On"
         systemversion "10.0"
         defines{
             "RE_PLATFORM_WINDOWS"
@@ -107,10 +107,10 @@ project "Sandbox"
 
     filter "configurations:Debug"
         defines {"RE_DEBUG"}
-        buildoptions "/MDd"
+        runtime "Debug"
         symbols "On"
 
     filter "configurations:Release"
         defines {"RE_RELEASE"}
-        buildoptions "/MD"
+        runtime "Release"
         optimize "On"

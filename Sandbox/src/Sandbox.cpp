@@ -5,9 +5,10 @@ public:
 	exampleLayer():layer("example"){}
 
 	void onUpdate() override {
+#if SHOW_ALL_DEBUG_INFO
 		RE_CLIENT_INFO("example layer update!");
+#endif
 	}
-
 	void onEvent(reder::event& e) override {
 		RE_CLIENT_TRACE("{0}", e);
 	}

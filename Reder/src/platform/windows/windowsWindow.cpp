@@ -11,6 +11,7 @@
 namespace reder {
 
 	static bool s_GLFWinitialized = false;
+	
 
 	window* window::createWindows(const windowProp& windowProp) {
 		return new windowsWindow(windowProp);
@@ -113,7 +114,7 @@ namespace reder {
 					event& e = keyReleasedEvent(key);
 					data.m_eventCallbackFn(e);
 					break;
-				}
+				} 
 				case GLFW_REPEAT: {
 					event& e = keyPressedEvent(key, 1);
 					data.m_eventCallbackFn(e);

@@ -23,7 +23,7 @@ namespace reder{
 		virtual unsigned int getHeight() const = 0;
 		static window* createWindows(const windowProp& windowProp=windowProp());
 
-
+		virtual void* getGlfwWindow()const=0;
 		virtual void setEventCallback(const eventCallbackFn& callback) = 0;
 		virtual void setVSync(bool enabled) = 0;
 		virtual bool isVSync() const = 0;
