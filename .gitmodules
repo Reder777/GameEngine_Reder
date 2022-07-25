@@ -1,6 +1,10 @@
 [submodule "Reder/modules/spdlog"]
 	path = Reder/modules/spdlog
 	url = https://github.com/gabime/spdlog.git
-[submodule "Reder/modules/GLFW"]
-	path = Reder/modules/GLFW
+[submodule "Reder/modules/glfw"]
+	path = Reder/modules/glfw
 	url = https://github.com/TheCherno/glfw.git
+[submodule "Reder/modules/imgui"]
+	path = Reder/modules/imgui
+	url = https://github.com/TheCherno/imgui.git
+	branch=docking
