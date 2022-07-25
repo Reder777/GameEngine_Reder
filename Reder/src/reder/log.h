@@ -2,9 +2,18 @@
 
 #include "core.h"
 #include "spdlog/spdlog.h"
-#include <memory>
+#include "spdlog/fmt/ostr.h"
 
 
+/*
+this file encapsulates some spdlog log function 
+and creates two logger
+corelogger for engine use
+clientlogger for app use
+more information please visit spdlog in github
+ref:https://github.com/gabime/spdlog
+
+*/
 
 namespace reder {
 
@@ -13,11 +22,11 @@ namespace reder {
 	{
 	public:
 		static void init();
-
+		//get corelogger 
 		inline static std::shared_ptr<spdlog::logger>& getCoreLogger() {
 			return coreLogger;
 		}
-
+		//get clientlogger
 		inline static std::shared_ptr<spdlog::logger>& getClientLogger() {
 			return clientLogger;
 		}
@@ -35,6 +44,7 @@ namespace reder {
 #define RE_CORE_DEBUG(...) ::reder::log::getCoreLogger()->debug(__VA_ARGS__)
 #define RE_CORE_WARN(...)  ::reder::log::getCoreLogger()->warn(__VA_ARGS__)
 #define RE_CORE_FATAL(...) ::reder::log::getCoreLogger()->fatal(__VA_ARGS__)
+#define RE_CORE_TRACE(...) ::reder::log::getCoreLogger()->trace(__VA_ARGS__)
 
 
 //client logger macros
@@ -43,3 +53,4 @@ namespace reder {
 #define RE_CLIENT_DEBUG(...) ::reder::log::getClientLogger()->debug(__VA_ARGS__)
 #define RE_CLIENT_WARN(...)  ::reder::log::getClientLogger()->warn(__VA_ARGS__)
 #define RE_CLIENT_FATAL(...) ::reder::log::getClientLogger()->fatal(__VA_ARGS__)
+#define RE_CLIENT_TRACE(...) ::reder::log::getClientLogger()->trace(__VA_ARGS__)

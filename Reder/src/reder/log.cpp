@@ -1,5 +1,7 @@
+#include "repch.h"
 #include "log.h"
 #include "spdlog/sinks/stdout_color_sinks.h"
+
 namespace reder {
 
 

@@ -1,42 +1,96 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="源文件">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    <Filter Include="platform">
+      <UniqueIdentifier>{4A63C33C-3630-1E48-5F49-0CF04B7553D6}</UniqueIdentifier>
     </Filter>
-    <Filter Include="头文件">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    <Filter Include="platform\openGL">
+      <UniqueIdentifier>{5E49BFD0-CAD4-2C95-D3E5-AF893FF08895}</UniqueIdentifier>
     </Filter>
-    <Filter Include="资源文件">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    <Filter Include="platform\windows">
+      <UniqueIdentifier>{A44FC440-9048-E392-B97A-C817A5D2C29E}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="reder">
+      <UniqueIdentifier>{B7024710-2317-6FC1-EC98-1221586C6BF2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="reder\event">
+      <UniqueIdentifier>{6881EA59-D436-634F-5D2B-5D26C9DF5953}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="reder\imgui">
+      <UniqueIdentifier>{61FD2D5A-CDB2-A64F-56A7-A026C25B9D53}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\platform\openGL\imguiOpenGL.h">
+      <Filter>platform\openGL</Filter>
+    </ClInclude>
+    <ClInclude Include="src\platform\windows\windowsWindow.h">
+      <Filter>platform\windows</Filter>
+    </ClInclude>
+    <ClInclude Include="src\reder.h" />
     <ClInclude Include="src\reder\application.h">
-      <Filter>头文件</Filter>
+      <Filter>reder</Filter>
     </ClInclude>
     <ClInclude Include="src\reder\core.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="src\reder.h">
-      <Filter>头文件</Filter>
+      <Filter>reder</Filter>
     </ClInclude>
     <ClInclude Include="src\reder\entryPoint.h">
-      <Filter>头文件</Filter>
+      <Filter>reder</Filter>
+    </ClInclude>
+    <ClInclude Include="src\reder\event\appEvent.h">
+      <Filter>reder\event</Filter>
+    </ClInclude>
+    <ClInclude Include="src\reder\event\event.h">
+      <Filter>reder\event</Filter>
+    </ClInclude>
+    <ClInclude Include="src\reder\event\keyboardEvent.h">
+      <Filter>reder\event</Filter>
+    </ClInclude>
+    <ClInclude Include="src\reder\event\mouseEvent.h">
+      <Filter>reder\event</Filter>
+    </ClInclude>
+    <ClInclude Include="src\reder\event\windowEvent.h">
+      <Filter>reder\event</Filter>
+    </ClInclude>
+    <ClInclude Include="src\reder\imgui\imguiLayer.h">
+      <Filter>reder\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="src\reder\layer.h">
+      <Filter>reder</Filter>
+    </ClInclude>
+    <ClInclude Include="src\reder\layerStack.h">
+      <Filter>reder</Filter>
     </ClInclude>
     <ClInclude Include="src\reder\log.h">
-      <Filter>头文件</Filter>
+      <Filter>reder</Filter>
     </ClInclude>
+    <ClInclude Include="src\reder\window.h">
+      <Filter>reder</Filter>
+    </ClInclude>
+    <ClInclude Include="src\repch.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\platform\openGL\imguiOpenGL.cpp">
+      <Filter>platform\openGL</Filter>
+    </ClCompile>
+    <ClCompile Include="src\platform\windows\windowsWindow.cpp">
+      <Filter>platform\windows</Filter>
+    </ClCompile>
     <ClCompile Include="src\reder\application.cpp">
-      <Filter>源文件</Filter>
+      <Filter>reder</Filter>
+    </ClCompile>
+    <ClCompile Include="src\reder\imgui\imguiLayer.cpp">
+      <Filter>reder\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="src\reder\layer.cpp">
+      <Filter>reder</Filter>
+    </ClCompile>
+    <ClCompile Include="src\reder\layerStack.cpp">
+      <Filter>reder</Filter>
     </ClCompile>
     <ClCompile Include="src\reder\log.cpp">
-      <Filter>源文件</Filter>
+      <Filter>reder</Filter>
     </ClCompile>
+    <ClCompile Include="src\repch.cpp" />
   </ItemGroup>
 </Project>
