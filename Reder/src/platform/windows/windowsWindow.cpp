@@ -1,14 +1,17 @@
 #include "repch.h"
 #include "windowsWindow.h"
 #include "reder/log.h"
-#include "event/appEvent.h"
-#include "event/keyboardEvent.h"
-#include "event/mouseEvent.h"
-#include "event/windowEvent.h"
+#include "reder/event/appEvent.h"
+#include "reder/event/keyboardEvent.h"
+#include "reder/event/mouseEvent.h"
+#include "reder/event/windowEvent.h"
+#include <glad/glad.h>
 
 
 namespace reder {
+
 	static bool s_GLFWinitialized = false;
+
 	window* window::createWindows(const windowProp& windowProp) {
 		return new windowsWindow(windowProp);
 	}
@@ -35,12 +38,22 @@ namespace reder {
 
 		glfwWindow = glfwCreateWindow((int)windowProp.m_width, (int)windowProp.m_height, windowProp.m_title.c_str(), nullptr, nullptr);
 		glfwMakeContextCurrent(glfwWindow);
+
+		/*
+		   glad loader 
+		   if failed ,gladloadglloader will return -1
+		*/
+		int status = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
+		RE_CORE_ASSERT(status, "failed to initialize gladloader");
+		
+
 		glfwSetWindowUserPointer(glfwWindow, &m_windowData);
 		setVSync(true);
 
 		/*
 		-----------------------------------------------callback function-----------------------------------------------------------
-		including windows,keyboard,mouse event.
+		including windows,keyboard,mouse event. 
+		glfw callback
 		*/
 		glfwSetWindowCloseCallback(glfwWindow, [](GLFWwindow* glfwWindow) {
 			windowData& data = *(windowData*)glfwGetWindowUserPointer(glfwWindow);
@@ -109,6 +122,14 @@ namespace reder {
 			}
 			});
 
+
+		glfwSetCharCallback(glfwWindow, [](GLFWwindow* glfwWindow, unsigned int keycode)
+			{
+				windowData& data = *(windowData*)glfwGetWindowUserPointer(glfwWindow);
+
+				keyTypedEvent event(keycode);
+				data.m_eventCallbackFn(event);
+			});
 
 
 	}

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="event">
-      <UniqueIdentifier>{071C650F-7330-8DC0-3CB2-3020A88589F1}</UniqueIdentifier>
-    </Filter>
     <Filter Include="platform">
       <UniqueIdentifier>{4A63C33C-3630-1E48-5F49-0CF04B7553D6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="platform\openGL">
+      <UniqueIdentifier>{5E49BFD0-CAD4-2C95-D3E5-AF893FF08895}</UniqueIdentifier>
     </Filter>
     <Filter Include="platform\windows">
       <UniqueIdentifier>{A44FC440-9048-E392-B97A-C817A5D2C29E}</UniqueIdentifier>
@@ -13,22 +13,16 @@
     <Filter Include="reder">
       <UniqueIdentifier>{B7024710-2317-6FC1-EC98-1221586C6BF2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="reder\event">
+      <UniqueIdentifier>{6881EA59-D436-634F-5D2B-5D26C9DF5953}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="reder\imgui">
+      <UniqueIdentifier>{61FD2D5A-CDB2-A64F-56A7-A026C25B9D53}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\event\appEvent.h">
-      <Filter>event</Filter>
-    </ClInclude>
-    <ClInclude Include="src\event\event.h">
-      <Filter>event</Filter>
-    </ClInclude>
-    <ClInclude Include="src\event\keyboardEvent.h">
-      <Filter>event</Filter>
-    </ClInclude>
-    <ClInclude Include="src\event\mouseEvent.h">
-      <Filter>event</Filter>
-    </ClInclude>
-    <ClInclude Include="src\event\windowEvent.h">
-      <Filter>event</Filter>
+    <ClInclude Include="src\platform\openGL\imguiOpenGL.h">
+      <Filter>platform\openGL</Filter>
     </ClInclude>
     <ClInclude Include="src\platform\windows\windowsWindow.h">
       <Filter>platform\windows</Filter>
@@ -42,6 +36,24 @@
     </ClInclude>
     <ClInclude Include="src\reder\entryPoint.h">
       <Filter>reder</Filter>
+    </ClInclude>
+    <ClInclude Include="src\reder\event\appEvent.h">
+      <Filter>reder\event</Filter>
+    </ClInclude>
+    <ClInclude Include="src\reder\event\event.h">
+      <Filter>reder\event</Filter>
+    </ClInclude>
+    <ClInclude Include="src\reder\event\keyboardEvent.h">
+      <Filter>reder\event</Filter>
+    </ClInclude>
+    <ClInclude Include="src\reder\event\mouseEvent.h">
+      <Filter>reder\event</Filter>
+    </ClInclude>
+    <ClInclude Include="src\reder\event\windowEvent.h">
+      <Filter>reder\event</Filter>
+    </ClInclude>
+    <ClInclude Include="src\reder\imgui\imguiLayer.h">
+      <Filter>reder\imgui</Filter>
     </ClInclude>
     <ClInclude Include="src\reder\layer.h">
       <Filter>reder</Filter>
@@ -58,11 +70,17 @@
     <ClInclude Include="src\repch.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\platform\openGL\imguiOpenGL.cpp">
+      <Filter>platform\openGL</Filter>
+    </ClCompile>
     <ClCompile Include="src\platform\windows\windowsWindow.cpp">
       <Filter>platform\windows</Filter>
     </ClCompile>
     <ClCompile Include="src\reder\application.cpp">
       <Filter>reder</Filter>
+    </ClCompile>
+    <ClCompile Include="src\reder\imgui\imguiLayer.cpp">
+      <Filter>reder\imgui</Filter>
     </ClCompile>
     <ClCompile Include="src\reder\layer.cpp">
       <Filter>reder</Filter>

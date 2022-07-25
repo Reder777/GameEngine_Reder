@@ -49,4 +49,17 @@ namespace reder {
 		EVENT_CLASS_TYPE(KeyReleased);
 	
 	};
+
+
+	class DLL_API keyTypedEvent :public keyboardEvent {
+	public:
+		keyTypedEvent(int keyCode):keyboardEvent(keyCode){}
+		std::string ToString() const override {
+			std::stringstream ss;
+			ss << "keyTypedEvent:" << r_keyCode;
+			return ss.str();
+		}
+		EVENT_CLASS_TYPE(KeyTyped);
+
+	};
 }

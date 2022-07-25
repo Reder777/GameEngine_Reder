@@ -15,7 +15,7 @@ namespace reder {
 			ss << "mouseMovedEvent:x_Pos  " << x_Pos << " ,y_Pos " << y_Pos;
 			return ss.str();
 		}
-		EVENT_CLASS_TYPE(MouseButtonPressed)
+		EVENT_CLASS_TYPE(MouseMoved)
 		EVENT_CLASS_CATEGORY(EventCategoryInput| EventCategoryMouse)
 	private:
 		float x_Pos, y_Pos;
@@ -42,7 +42,7 @@ namespace reder {
 	public:
 		inline int GetMouseButton() const { return r_Button; }
 
-		EVENT_CLASS_CATEGORY(EventCategoryMouse | EventCategoryInput)
+		EVENT_CLASS_CATEGORY(EventCategoryInput | EventCategoryMouse)
 	protected:
 		mouseButtonEvent(int button)
 			: r_Button(button) {}

@@ -11,8 +11,11 @@ outputdir= "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 -- Include directories relative to root folder (solution directory)
 IncludeDir = {}
 IncludeDir["GLFW"] = "Reder/modules/glfw/include"
-
+IncludeDir["GLAD"] = "Reder/modules/glad/include"
+IncludeDir["IMGUI"] = "Reder/modules/imgui"
 include "Reder/modules/glfw"
+include "Reder/modules/glad"
+include "Reder/modules/imgui"
 
 --[[
      ----------------------------project Reder------------------------------------
@@ -33,11 +36,15 @@ project "Reder"
     includedirs{
         "%{prj.name}/src",
         "%{prj.name}/modules/spdlog/include",
-        "%{IncludeDir.GLFW}"
+        "%{IncludeDir.GLFW}",
+        "%{IncludeDir.GLAD}",
+        "%{IncludeDir.IMGUI}"
     }
     links{
         "GLFW",
-        "opengl32.lib"
+        "opengl32.lib",
+        "GLAD",
+        "ImGui"
     }
     filter "system:Windows"
         system("windows")
@@ -46,7 +53,8 @@ project "Reder"
         systemversion "10.0"
         defines{
             "RE_PLATFORM_WINDOWS",
-            "RE_DLL_BUILD"
+            "RE_DLL_BUILD",
+            "GLFW_INCLUDE_NONE"
         }
 
         postbuildcommands{

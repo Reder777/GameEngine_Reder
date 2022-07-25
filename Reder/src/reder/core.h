@@ -25,3 +25,4 @@
 	#define RE_CLIENT_ASSERT(x,...)
 #endif
  
+#define RE_BIND_EVENT(fn) std::bind(&fn,this,std::placeholders::_1)

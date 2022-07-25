@@ -20,6 +20,7 @@ public:
 
 	Sandbox() {
 		pushLayer(new exampleLayer());
+		pushOverLayer(new reder::imguiLayer());
 	}
 
 	~Sandbox() {
