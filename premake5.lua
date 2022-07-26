@@ -15,6 +15,9 @@ IncludeDir = {}
 IncludeDir["GLFW"] = "Reder/modules/glfw/include"
 IncludeDir["GLAD"] = "Reder/modules/glad/include"
 IncludeDir["IMGUI"] = "Reder/modules/imgui"
+IncludeDir["GLM"] ="Reder/modules/glm"
+
+
 include "Reder/modules/glfw"
 include "Reder/modules/glad"
 include "Reder/modules/imgui"
@@ -34,7 +37,9 @@ project "Reder"
 
     files{
         "%{prj.name}/src/**.h",
-        "%{prj.name}/src/**.cpp"
+        "%{prj.name}/src/**.cpp", 
+        "%{prj.name}/modules/glm/glm/**.hpp",
+        "%{prj.name}/modules/glm/glm/**.inl"
     }
     pchheader "repch.h"
     pchsource "Reder/src/repch.cpp"
@@ -43,7 +48,8 @@ project "Reder"
         "%{prj.name}/modules/spdlog/include",
         "%{IncludeDir.GLFW}",
         "%{IncludeDir.GLAD}",
-        "%{IncludeDir.IMGUI}"
+        "%{IncludeDir.IMGUI}",
+        "%{IncludeDir.GLM}"
     }
     links{
         "GLFW",
@@ -92,7 +98,8 @@ project "Sandbox"
     }
     includedirs{
         "Reder/modules/spdlog/include",
-        "Reder/src"
+        "Reder/src",
+        "%{IncludeDir.GLM}"
     }
     links{
         "Reder"

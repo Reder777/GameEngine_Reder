@@ -8,9 +8,24 @@ public:
 #if SHOW_ALL_DEBUG_INFO
 		RE_CLIENT_INFO("example layer update!");
 #endif
+#if SHOW_TEST_INFO
+		if (reder::input::isKeyPressed(RE_KEY_TAB)) {
+			RE_CLIENT_TRACE("tab pressed");
+		}
+		//reder's keyCode test 
+#endif
 	}
 	void onEvent(reder::event& e) override {
+
+
+#if SHOW_TEST_INFO
 		RE_CLIENT_TRACE("{0}", e);
+		if (e.getEventType() == reder::eventType::KeyPressed) {
+			reder::keyPressedEvent& event = (reder::keyPressedEvent&)e;
+			RE_CLIENT_TRACE("{0}", (char)event.getKeyCode());
+		}
+#endif
+
 	}
 };
 

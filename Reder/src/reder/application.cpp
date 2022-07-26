@@ -41,9 +41,6 @@ namespace reder {
 			}
 			m_Window->onUpdate();
 
-			float x =input::getX();
-			float y = input::getY();
-			RE_CORE_TRACE("{0}  {1}", x, y);
 		}
 		
 	}

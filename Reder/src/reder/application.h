@@ -3,6 +3,8 @@
 #include "window.h"
 #include "event/windowEvent.h"
 #include "layerStack.h"
+
+
 namespace reder{
 	class DLL_API application
 	{
