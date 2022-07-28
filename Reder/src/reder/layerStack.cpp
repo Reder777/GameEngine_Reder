@@ -4,7 +4,6 @@
 
 namespace reder {
 	layerStack::layerStack() {
-		layers_Head = layers.begin();
 	}
 
 	layerStack::~layerStack() {
@@ -14,7 +13,8 @@ namespace reder {
 	}
 
 	void layerStack::pushLayer(layer* layer) {
-		layers_Head = layers.emplace(layers_Head, layer);
+		layers.emplace(this->begin()+layerIndex, layer);
+		layerIndex++;
 	}
 
 	void layerStack::pushOverLayer(layer* overLayer) {
@@ -25,7 +25,7 @@ namespace reder {
 		auto it = std::find(layers.begin(), layers.end(), layer);
 		if (it != layers.end()) {
 			layers.erase(it);
-			layers_Head--;
+			layerIndex--;
 		}
 	}
 

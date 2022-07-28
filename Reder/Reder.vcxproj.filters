@@ -1293,9 +1293,6 @@
     <ClInclude Include="modules\glm\glm\vector_relational.hpp">
       <Filter>modules\glm\glm</Filter>
     </ClInclude>
-    <ClInclude Include="src\platform\openGL\imguiOpenGL.h">
-      <Filter>src\platform\openGL</Filter>
-    </ClInclude>
     <ClInclude Include="src\platform\windows\windowsInput.h">
       <Filter>src\platform\windows</Filter>
     </ClInclude>
@@ -1358,9 +1355,6 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\platform\openGL\imguiOpenGL.cpp">
-      <Filter>src\platform\openGL</Filter>
-    </ClCompile>
     <ClCompile Include="src\platform\windows\windowsInput.cpp">
       <Filter>src\platform\windows</Filter>
     </ClCompile>
@@ -1385,5 +1379,6 @@
     <ClCompile Include="src\repch.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="src\reder\imgui\imguiBuild.cpp" />
   </ItemGroup>
 </Project>

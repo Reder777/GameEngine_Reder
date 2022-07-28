@@ -518,7 +518,6 @@
     <ClInclude Include="modules\glm\glm\vec3.hpp" />
     <ClInclude Include="modules\glm\glm\vec4.hpp" />
     <ClInclude Include="modules\glm\glm\vector_relational.hpp" />
-    <ClInclude Include="src\platform\openGL\imguiOpenGL.h" />
     <ClInclude Include="src\platform\windows\windowsInput.h" />
     <ClInclude Include="src\platform\windows\windowsWindow.h" />
     <ClInclude Include="src\reder.h" />
@@ -541,10 +540,10 @@
     <ClInclude Include="src\repch.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\platform\openGL\imguiOpenGL.cpp" />
     <ClCompile Include="src\platform\windows\windowsInput.cpp" />
     <ClCompile Include="src\platform\windows\windowsWindow.cpp" />
     <ClCompile Include="src\reder\application.cpp" />
+    <ClCompile Include="src\reder\imgui\imguiBuild.cpp" />
     <ClCompile Include="src\reder\imgui\imguiLayer.cpp" />
     <ClCompile Include="src\reder\layer.cpp" />
     <ClCompile Include="src\reder\layerStack.cpp" />

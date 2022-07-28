@@ -10,6 +10,7 @@ namespace reder {
 		virtual ~layer();
 		virtual void onEvent(event& e){}
 		virtual void onUpdate() {}
+		virtual void imguiRender(){}
 		virtual void attach() {}
 		virtual void detach() {}
 

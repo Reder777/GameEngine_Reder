@@ -19,7 +19,7 @@ namespace reder {
 		std::vector<layer*>::iterator end() { return layers.end(); }
 	private :
 		std::vector<layer*> layers;
-		std::vector<layer*>::iterator layers_Head;
+		unsigned int layerIndex = 0;
 	};
 
 }

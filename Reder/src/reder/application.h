@@ -4,6 +4,8 @@
 #include "event/windowEvent.h"
 #include "layerStack.h"
 
+#include "imgui/imguiLayer.h"
+
 
 namespace reder{
 	class DLL_API application
@@ -30,6 +32,7 @@ namespace reder{
 	private:
 		bool windowClose(windowCloseEvent& e);
 		std::unique_ptr<window> m_Window;
+		imguiLayer* m_imguiLayer;
 		bool m_Running = true;
 		layerStack m_layStack;
 

@@ -19,7 +19,8 @@ namespace reder {
 		m_Window = std::unique_ptr<window>(window::createWindows());
 		m_Window->setEventCallback(RE_BIND_EVENT(application::OnEvent));
 
-		
+		m_imguiLayer = new imguiLayer();
+		pushOverLayer(m_imguiLayer);
 	}
 
 	application::~application() {
@@ -39,6 +40,11 @@ namespace reder {
 			for (layer* layer : m_layStack) {
 				layer->onUpdate();
 			}
+			m_imguiLayer->begin();
+			for (layer* layer : m_layStack) {
+				layer->imguiRender();
+			}
+			m_imguiLayer->end();
 			m_Window->onUpdate();
 
 		}
