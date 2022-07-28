@@ -24,9 +24,7 @@ namespace reder {
 
 		// Create window with graphics context
 		GLFWwindow* window = static_cast<GLFWwindow*>(application::getApp().getWindow().getGlfwWindow());
-
-		glfwMakeContextCurrent(window);
-		glfwSwapInterval(1); // Enable vsync
+		
 
 		// Setup Dear ImGui context
 		IMGUI_CHECKVERSION();
@@ -80,7 +78,7 @@ namespace reder {
 	{
 		ImGuiIO& io = ImGui::GetIO();
 		application& app = application::getApp();
-		io.DisplaySize=ImVec2(app.getWindow().getWidth(), app.getWindow().getHeight());
+		io.DisplaySize=ImVec2((float)app.getWindow().getWidth(), (float)app.getWindow().getHeight());
 
 		ImGui::Render();
 		ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());

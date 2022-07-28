@@ -1,8 +1,16 @@
 #include "reder.h"
+#include "imgui.h"
 
 class exampleLayer :public reder::layer {
 public:
+
 	exampleLayer():layer("example"){}
+
+	virtual void imguiRender() override {
+		ImGui::Begin("hello");
+		ImGui::Text("world");
+		ImGui::End();
+	}
 
 	void onUpdate() override {
 #if SHOW_ALL_DEBUG_INFO

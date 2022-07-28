@@ -1,10 +1,14 @@
 #pragma once
 #ifdef RE_PLATFORM_WINDOWS
-	#ifdef RE_DLL_BUILD
-		#define DLL_API __declspec(dllexport)
+	#if RE_DYNAMIC_LINK
+		#ifdef RE_DLL_BUILD
+			#define DLL_API __declspec(dllexport)
+		#else
+			#define DLL_API __declspec(dllimport)
+		#endif
 	#else
-		#define DLL_API __declspec(dllimport)
-	#endif 
+		#define DLL_API
+	#endif
 #else
 	#error reder only supports windows! located in core.h
 #endif

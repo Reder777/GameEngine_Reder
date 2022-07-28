@@ -25,13 +25,14 @@ include "Reder/modules/imgui"
 
 
 --[[
-     ----------------------------project Reder------------------------------------
+     ----------------------------project Reder--------------------------------------
+     -------------------------------------------------------------------------------
 --]]
 project "Reder"
     location "Reder"
-    kind "SharedLib"
+    kind "StaticLib"
     language "C++"
-    staticruntime "off"
+    staticruntime "on"
     targetdir ("bin/" .. outputdir .. "/%{prj.name}")
     objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
 
@@ -64,31 +65,31 @@ project "Reder"
         defines{
             "RE_PLATFORM_WINDOWS",
             "RE_DLL_BUILD",
-            "GLFW_INCLUDE_NONE"
+            "GLFW_INCLUDE_NONE",
+            "IMGUI_API=__declspec(dllexport)"
         }
 
-        postbuildcommands{
-            ("{COPY} %{cfg.buildtarget.relpath} \"../bin/"..outputdir.."/Sandbox/\"")
-        }
     filter "configurations:Debug"
         defines {"RE_DEBUG"}
         runtime "Debug"
-        symbols "On"
+        symbols "on"
 
     filter "configurations:Release"
         defines {"RE_RELEASE"}
         runtime "Release"
-        optimize "On"
+        optimize "on"
 
 --[[
      ----------------------------project Sandbox------------------------------------
+     -------------------------------------------------------------------------------
 --]]
 
 project "Sandbox"
     location "Sandbox"
     kind "ConsoleApp"
     language "C++"
-    staticruntime "off"
+    cppdialect "C++14"
+    staticruntime "on"
     targetdir ("bin/" .. outputdir .. "/%{prj.name}")
     objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
 
@@ -99,6 +100,7 @@ project "Sandbox"
     includedirs{
         "Reder/modules/spdlog/include",
         "Reder/src",
+        "Reder/modules/imgui",
         "%{IncludeDir.GLM}"
     }
     links{
@@ -106,18 +108,18 @@ project "Sandbox"
     }
     filter "system:Windows"
         system("windows")
-        cppdialect "C++14"
         systemversion "10.0"
         defines{
-            "RE_PLATFORM_WINDOWS"
+            "RE_PLATFORM_WINDOWS",
+            "IMGUI_API=__declspec(dllimport)"
         }
 
     filter "configurations:Debug"
         defines {"RE_DEBUG"}
         runtime "Debug"
-        symbols "On"
+        symbols "on"
 
     filter "configurations:Release"
         defines {"RE_RELEASE"}
         runtime "Release"
-        optimize "On"
+        optimize "on"
