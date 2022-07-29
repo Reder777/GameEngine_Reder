@@ -15,7 +15,7 @@
 
 
 #define BIT(x) (1 << x)
-#define SHOW_TEST_INFO 1
+#define SHOW_TEST_INFO 0
 #define SHOW_ALL_DEBUG_INFO 0
 
 #ifdef RE_ENABLE_ASSERT

@@ -1350,6 +1350,8 @@
     <ClInclude Include="src\repch.h">
       <Filter>src</Filter>
     </ClInclude>
+    <ClInclude Include="src\reder\renderer\grahpicsContext.h" />
+    <ClInclude Include="src\platform\openGL\openglContext.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\platform\windows\windowsInput.cpp">
@@ -1379,5 +1381,6 @@
     <ClCompile Include="src\repch.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="src\platform\openGL\openglContext.cpp" />
   </ItemGroup>
 </Project>

@@ -29,6 +29,8 @@ namespace reder{
 		inline window& getWindow() { return *m_Window; }
 
 		inline static application& getApp() { return *app_Instance; }
+
+		unsigned int m_VertexBuffer, m_IndexBuffer, m_VertexArray;
 	private:
 		bool windowClose(windowCloseEvent& e);
 		std::unique_ptr<window> m_Window;

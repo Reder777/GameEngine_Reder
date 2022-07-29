@@ -5,6 +5,7 @@
 #include "reder/event/keyboardEvent.h"
 #include "reder/event/mouseEvent.h"
 #include "reder/event/windowEvent.h"
+#include "platform/openGL/openglContext.h"
 #include <glad/glad.h>
 
 
@@ -30,6 +31,7 @@ namespace reder {
 		m_windowData.m_height = windowProp.m_height;
 		m_windowData.m_width = windowProp.m_width;
 
+
 		RE_CORE_INFO("start creating windows title:{0} height:{1} width:{2} !", m_windowData.m_title, m_windowData.m_height, m_windowData.m_width);
 		if (!s_GLFWinitialized) {
 			int ifSucceed = glfwInit();
@@ -38,14 +40,8 @@ namespace reder {
 		}
 
 		glfwWindow = glfwCreateWindow((int)windowProp.m_width, (int)windowProp.m_height, windowProp.m_title.c_str(), nullptr, nullptr);
-		glfwMakeContextCurrent(glfwWindow);
-
-		/*
-		   glad loader 
-		   if failed ,gladloadglloader will return -1
-		*/
-		int status = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
-		RE_CORE_ASSERT(status, "failed to initialize gladloader");
+		m_context = new openglContext(glfwWindow);
+		m_context->init();
 		
 
 		glfwSetWindowUserPointer(glfwWindow, &m_windowData);
@@ -155,6 +151,6 @@ namespace reder {
 
 	void windowsWindow::onUpdate() {
 		glfwPollEvents();
-		glfwSwapBuffers(glfwWindow);
+		m_context->swapBuffers();
 	}
 }

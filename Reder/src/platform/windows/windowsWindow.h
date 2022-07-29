@@ -2,6 +2,7 @@
 
 #include <GLFW/glfw3.h>
 #include "reder/window.h"
+#include "reder/renderer/grahpicsContext.h"
 
 
 
@@ -37,6 +38,7 @@ namespace reder {
 
 		};
 		GLFWwindow* glfwWindow;
+		grahpicsContext* m_context;
 		windowData m_windowData;
 	};
 
