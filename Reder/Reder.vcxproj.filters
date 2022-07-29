@@ -1352,6 +1352,8 @@
     </ClInclude>
     <ClInclude Include="src\reder\renderer\grahpicsContext.h" />
     <ClInclude Include="src\platform\openGL\openglContext.h" />
+    <ClInclude Include="src\reder\renderer\shader.h" />
+    <ClInclude Include="src\platform\openGL\openglShader.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\platform\windows\windowsInput.cpp">
@@ -1382,5 +1384,6 @@
       <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="src\platform\openGL\openglContext.cpp" />
+    <ClCompile Include="src\platform\openGL\openglShader.cpp" />
   </ItemGroup>
 </Project>
