@@ -8,7 +8,34 @@
 
 
 
-
+/*
+------------------------------------temp translate fun------------------------------
+*/
+namespace reder {
+	GLenum elementTypeToGLenum(bufferElementType type)
+	{
+		switch (type)
+		{
+			case reder::bufferElementType::None:
+				RE_CORE_ASSERT(false, "elementTypeToGLenum : no type defined!");
+				return 0;
+			case reder::bufferElementType::Int:			    return GL_INT;
+			case reder::bufferElementType::Int2:			return GL_INT;
+			case reder::bufferElementType::Int3:			return GL_INT;
+			case reder::bufferElementType::Int4:			return GL_INT;
+			case reder::bufferElementType::Float:			return GL_FLOAT;
+			case reder::bufferElementType::Float2:			return GL_FLOAT;
+			case reder::bufferElementType::Float3:			return GL_FLOAT;
+			case reder::bufferElementType::Float4:			return GL_FLOAT;
+			case reder::bufferElementType::Mat3:			return GL_FLOAT;
+			case reder::bufferElementType::Mat4:			return GL_FLOAT;
+			case reder::bufferElementType::Bool:			return GL_BOOL;
+			default:                             		    break;
+		}
+		RE_CORE_ASSERT(false, "elementTypeToGLenum : unknown type!");
+		return 0;
+	}
+}
 
 namespace reder {
 	application* application::app_Instance = nullptr;
@@ -39,8 +66,24 @@ namespace reder {
 		};
 		m_vertexBuffer = std::unique_ptr<vertexBuffer>(vertexBuffer::create(vertices, sizeof(vertices)));
 
-		glEnableVertexAttribArray(0);
-		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), nullptr);
+		bufferLayout layout = {
+			{bufferElementType::Float3 , "a_Position"}
+		};
+
+		bufferLayout layoutTest = bufferLayout(layout);
+		RE_BUFFER_INT index = 0;
+		for (auto& element : layoutTest) {
+			glEnableVertexAttribArray(index);
+			glVertexAttribPointer(
+				index, 
+				element.getComponentCount(),
+				elementTypeToGLenum(element.type), 
+				element.normalized, 
+				element.size,
+				(const void*)element.offset
+			);
+		}
+
 
 	
 		unsigned int indices[3] = { 0, 1, 2 };
@@ -141,3 +184,5 @@ namespace reder {
 		overlayer->attach();
 	}
 }
+
+
