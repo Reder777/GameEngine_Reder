@@ -9,7 +9,7 @@ namespace reder {
 		shader() {};
 		~shader() {};
 
-		virtual void bind() const {};
-		virtual void unbind() const {};
+		virtual void bind() const =0;
+		virtual void unbind() const =0;
 	};
 }

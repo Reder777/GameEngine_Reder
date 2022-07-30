@@ -6,6 +6,7 @@
 
 #include "imgui/imguiLayer.h"
 #include "reder/renderer/shader.h"
+#include "reder/renderer/buffers.h"
 
 
 namespace reder{
@@ -36,6 +37,8 @@ namespace reder{
 		bool windowClose(windowCloseEvent& e);
 		std::unique_ptr<window> m_Window;
 		std::unique_ptr<shader> m_Shader;
+		std::unique_ptr<vertexBuffer> m_vertexBuffer;
+		std::unique_ptr<indexBuffer> m_indexBuffer;
 		imguiLayer* m_imguiLayer;
 		bool m_Running = true;
 		layerStack m_layStack;

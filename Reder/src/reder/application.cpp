@@ -8,6 +8,8 @@
 
 
 
+
+
 namespace reder {
 	application* application::app_Instance = nullptr;
 	input* input::input_instance = new windowsInput();;
@@ -23,31 +25,26 @@ namespace reder {
 		m_imguiLayer = new imguiLayer();
 		pushOverLayer(m_imguiLayer);
 
+
 		
 
 		glGenVertexArrays(1, &m_VertexArray);
 		glBindVertexArray(m_VertexArray);
 
-		glGenBuffers(1, &m_VertexBuffer);
-		glBindBuffer(GL_ARRAY_BUFFER, m_VertexBuffer);
 
 		float vertices[3 * 3] = {
 			-0.5f, -0.5f, 0.0f,
 			 0.5f, -0.5f, 0.0f,
-			 0.0f,  0.5f, 0.0f
+			 0.0f,  1.0f, 0.0f
 		};
-
-		glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+		m_vertexBuffer = std::unique_ptr<vertexBuffer>(vertexBuffer::create(vertices, sizeof(vertices)));
 
 		glEnableVertexAttribArray(0);
 		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), nullptr);
 
-		glGenBuffers(1, &m_IndexBuffer);
-		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_IndexBuffer);
-
+	
 		unsigned int indices[3] = { 0, 1, 2 };
-		glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
-
+		m_indexBuffer = std::unique_ptr<indexBuffer>(indexBuffer::create(indices, 3));
 		std::string vertexSource=R"(
 			#version 330 core
 			layout(location=0) in vec3 a_position;
@@ -63,7 +60,7 @@ namespace reder {
 			layout(location=0) out vec4 color;
 			in vec3 forfun;
 			void main() {
-				color = vec4(forfun*0.5+0.4, 1.0);
+				color = vec4(forfun*0.5+0.5, 1.0);
 			}
 		)";
 

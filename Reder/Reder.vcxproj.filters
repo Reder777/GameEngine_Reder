@@ -1354,6 +1354,9 @@
     <ClInclude Include="src\platform\openGL\openglContext.h" />
     <ClInclude Include="src\reder\renderer\shader.h" />
     <ClInclude Include="src\platform\openGL\openglShader.h" />
+    <ClInclude Include="src\reder\renderer\rendererAPI.h" />
+    <ClInclude Include="src\reder\renderer\buffers.h" />
+    <ClInclude Include="src\platform\openGL\openglBuffer.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\platform\windows\windowsInput.cpp">
@@ -1385,5 +1388,8 @@
     </ClCompile>
     <ClCompile Include="src\platform\openGL\openglContext.cpp" />
     <ClCompile Include="src\platform\openGL\openglShader.cpp" />
+    <ClCompile Include="src\reder\renderer\rendererAPI.cpp" />
+    <ClCompile Include="src\reder\renderer\buffers.cpp" />
+    <ClCompile Include="src\platform\openGL\openglBuffer.cpp" />
   </ItemGroup>
 </Project>
