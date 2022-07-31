@@ -26,7 +26,7 @@ namespace reder {
 
 		}
 
-		RE_BUFFER_INT getComponentCount() {
+		RE_BUFFER_INT getComponentCount() const{
 			switch (type)
 			{
 				case reder::bufferElementType::None:
@@ -89,6 +89,8 @@ namespace reder {
 		inline const std::vector<bufferElement>& getElements() const { return m_elements; }
 		std::vector<bufferElement>::iterator begin() { return m_elements.begin(); }
 		std::vector<bufferElement>::iterator end()   { return m_elements.end(); }
+		std::vector<bufferElement>::const_iterator begin() const {return m_elements.begin(); }
+		std::vector<bufferElement>::const_iterator end() const { return m_elements.end(); }
 
 	private:
 		void calculateOffsetAndStride() {
@@ -114,7 +116,12 @@ namespace reder {
 		virtual void bind() const = 0;
 		virtual void unbind() const = 0;
 
+		virtual const bufferLayout& getLayout() const = 0;
+		virtual void setLayout(const bufferLayout& layout) = 0;
+
 		static vertexBuffer* create(float* vertices, RE_BUFFER_INT size);
+
+	
 	};
 
 

@@ -16,8 +16,16 @@ namespace reder {
 		virtual ~openglVertexBuffer();
 		virtual void bind() const override;
 		virtual void unbind() const override;
+
+		inline virtual const bufferLayout& getLayout() const override {
+			return m_bufferLayout;
+		}
+		virtual void setLayout(const bufferLayout& layout) override{
+			m_bufferLayout = layout;
+		}
 	private:
 		RE_BUFFER_INT m_VertexBufferId;
+		bufferLayout m_bufferLayout;
 	};
 	/*
 	---------------------------opengl index buffer-------------------------------

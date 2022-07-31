@@ -2,44 +2,18 @@
 #include "application.h"
 #include "log.h"
 
-#include <glad/glad.h>
 #include "platform/windows/windowsInput.h"
 #include "platform/openGL/openglShader.h"
+#include <glad/glad.h>
 
 
 
-/*
-------------------------------------temp translate fun------------------------------
-*/
-namespace reder {
-	GLenum elementTypeToGLenum(bufferElementType type)
-	{
-		switch (type)
-		{
-			case reder::bufferElementType::None:
-				RE_CORE_ASSERT(false, "elementTypeToGLenum : no type defined!");
-				return 0;
-			case reder::bufferElementType::Int:			    return GL_INT;
-			case reder::bufferElementType::Int2:			return GL_INT;
-			case reder::bufferElementType::Int3:			return GL_INT;
-			case reder::bufferElementType::Int4:			return GL_INT;
-			case reder::bufferElementType::Float:			return GL_FLOAT;
-			case reder::bufferElementType::Float2:			return GL_FLOAT;
-			case reder::bufferElementType::Float3:			return GL_FLOAT;
-			case reder::bufferElementType::Float4:			return GL_FLOAT;
-			case reder::bufferElementType::Mat3:			return GL_FLOAT;
-			case reder::bufferElementType::Mat4:			return GL_FLOAT;
-			case reder::bufferElementType::Bool:			return GL_BOOL;
-			default:                             		    break;
-		}
-		RE_CORE_ASSERT(false, "elementTypeToGLenum : unknown type!");
-		return 0;
-	}
-}
 
 namespace reder {
 	application* application::app_Instance = nullptr;
 	input* input::input_instance = new windowsInput();;
+
+
 	application::application() {
 
 		RE_CORE_ASSERT(!app_Instance, "app already exists!");
@@ -52,42 +26,29 @@ namespace reder {
 		m_imguiLayer = new imguiLayer();
 		pushOverLayer(m_imguiLayer);
 
-
-		
-
-		glGenVertexArrays(1, &m_VertexArray);
-		glBindVertexArray(m_VertexArray);
+		m_vertexArray = std::shared_ptr<vertexArray>(vertexArray::create());
+		m_vertexArray->bind();
 
 
 		float vertices[3 * 3] = {
-			-0.5f, -0.5f, 0.0f,
-			 0.5f, -0.5f, 0.0f,
-			 0.0f,  1.0f, 0.0f
+			-0.5f, -0.75f, 0.0f,
+			 0.5f, -0.75f, 0.0f,
+			 0.0f,  0.75f, 0.0f
 		};
-		m_vertexBuffer = std::unique_ptr<vertexBuffer>(vertexBuffer::create(vertices, sizeof(vertices)));
+		std::shared_ptr<vertexBuffer> vertexBuffer;
+		vertexBuffer.reset(vertexBuffer::create(vertices, sizeof(vertices)));
 
 		bufferLayout layout = {
 			{bufferElementType::Float3 , "a_Position"}
 		};
-
-		bufferLayout layoutTest = bufferLayout(layout);
-		RE_BUFFER_INT index = 0;
-		for (auto& element : layoutTest) {
-			glEnableVertexAttribArray(index);
-			glVertexAttribPointer(
-				index, 
-				element.getComponentCount(),
-				elementTypeToGLenum(element.type), 
-				element.normalized, 
-				element.size,
-				(const void*)element.offset
-			);
-		}
-
-
+		vertexBuffer->setLayout(layout);
+		m_vertexArray->addVertexBuffer(vertexBuffer);
+	
 	
 		unsigned int indices[3] = { 0, 1, 2 };
-		m_indexBuffer = std::unique_ptr<indexBuffer>(indexBuffer::create(indices, 3));
+		std::shared_ptr<indexBuffer> indexBuffer;
+		indexBuffer.reset((indexBuffer::create(indices, 3)));
+		m_vertexArray->setIndexBuffer(indexBuffer);
 		std::string vertexSource=R"(
 			#version 330 core
 			layout(location=0) in vec3 a_position;
@@ -111,6 +72,51 @@ namespace reder {
 		/*
 		m_Shader.reset(new openglShader());
 		*/
+
+		m_vertexArray_square = std::shared_ptr<vertexArray>(vertexArray::create());
+		m_vertexArray_square->bind();
+
+
+		float vertices_square[3 * 4] = {
+			-0.75f, -0.75f, 0.0f,
+			 0.75f, -0.75f, 0.0f,
+			 0.75f,  0.75f, 0.0f,
+			-0.75f,  0.75f, 0.0f
+		};
+		std::shared_ptr<reder::vertexBuffer> vertexBufferSquare;
+		vertexBufferSquare.reset(vertexBuffer::create(vertices_square, sizeof(vertices_square)));
+
+		bufferLayout layout_square = {
+			{bufferElementType::Float3 , "a_Position"}
+		};
+		vertexBufferSquare->setLayout(layout_square);
+		m_vertexArray_square->addVertexBuffer(vertexBufferSquare);
+
+
+		unsigned int indices_square[6] = { 0,1,2,2,3,0};
+		std::shared_ptr<reder::indexBuffer> indexBufferSquare;
+		indexBufferSquare.reset((indexBuffer::create(indices_square, 6)));
+		m_vertexArray_square->setIndexBuffer(indexBufferSquare);
+		std::string vertexSource_square = R"(
+			#version 330 core
+			layout(location=0) in vec3 a_position;
+			out vec3 forfun ;
+			void main(){
+				forfun = a_position;
+				gl_Position = vec4(a_position,1.0);
+			}		
+		)";
+
+		std::string fragmentSource_square = R"(
+			#version 330 core
+			layout(location=0) out vec4 color;
+			in vec3 forfun;
+			void main() {
+				color = vec4( 0.2, 0.3, 0.8, 1.0);
+			}
+		)";
+
+		m_Shader_square = std::unique_ptr<shader>(new openglShader(vertexSource_square, fragmentSource_square));
 	}
 
 	application::~application() {
@@ -126,8 +132,12 @@ namespace reder {
 			glClearColor(0, 0.5f, 0.5f, 1);
 			glClear(GL_COLOR_BUFFER_BIT);
 
+			m_Shader_square->bind();
+			m_vertexArray_square->bind();
+			glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr);
+
 			m_Shader->bind();
-			glBindVertexArray(m_VertexArray);
+			m_vertexArray->bind();
 			glDrawElements(GL_TRIANGLES, 3, GL_UNSIGNED_INT, nullptr);
 
 			for (layer* layer : m_layStack) {

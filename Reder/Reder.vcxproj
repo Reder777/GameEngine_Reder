@@ -515,6 +515,7 @@
     <ClInclude Include="src\platform\openGL\openglBuffer.h" />
     <ClInclude Include="src\platform\openGL\openglContext.h" />
     <ClInclude Include="src\platform\openGL\openglShader.h" />
+    <ClInclude Include="src\platform\openGL\openglVertexArray.h" />
     <ClInclude Include="src\platform\windows\windowsInput.h" />
     <ClInclude Include="src\platform\windows\windowsWindow.h" />
     <ClInclude Include="src\reder.h" />
@@ -537,6 +538,7 @@
     <ClInclude Include="src\reder\renderer\grahpicsContext.h" />
     <ClInclude Include="src\reder\renderer\rendererAPI.h" />
     <ClInclude Include="src\reder\renderer\shader.h" />
+    <ClInclude Include="src\reder\renderer\vertexArray.h" />
     <ClInclude Include="src\reder\window.h" />
     <ClInclude Include="src\repch.h" />
   </ItemGroup>
@@ -544,6 +546,7 @@
     <ClCompile Include="src\platform\openGL\openglBuffer.cpp" />
     <ClCompile Include="src\platform\openGL\openglContext.cpp" />
     <ClCompile Include="src\platform\openGL\openglShader.cpp" />
+    <ClCompile Include="src\platform\openGL\openglVertexArray.cpp" />
     <ClCompile Include="src\platform\windows\windowsInput.cpp" />
     <ClCompile Include="src\platform\windows\windowsWindow.cpp" />
     <ClCompile Include="src\reder\application.cpp" />
@@ -554,6 +557,7 @@
     <ClCompile Include="src\reder\log.cpp" />
     <ClCompile Include="src\reder\renderer\buffers.cpp" />
     <ClCompile Include="src\reder\renderer\rendererAPI.cpp" />
+    <ClCompile Include="src\reder\renderer\vertexArray.cpp" />
     <ClCompile Include="src\repch.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>
     </ClCompile>
