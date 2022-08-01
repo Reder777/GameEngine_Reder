@@ -1,9 +1,17 @@
 #include "repch.h"
 #include "application.h"
-#include "log.h"
+
+
+#include "reder/log.h"
+#include "reder/renderer/renderCommand.h"
+#include "reder/renderer/renderer.h"
+
 
 #include "platform/windows/windowsInput.h"
 #include "platform/openGL/openglShader.h"
+
+
+
 #include <glad/glad.h>
 
 
@@ -129,16 +137,16 @@ namespace reder {
 
 		while (m_Running) {
 
-			glClearColor(0, 0.5f, 0.5f, 1);
-			glClear(GL_COLOR_BUFFER_BIT);
+			renderCommand::clearColor({ 1.0f, 1.0f, 0, 1 });
+			renderCommand::clear();
 
+			renderer::beginScene();
 			m_Shader_square->bind();
-			m_vertexArray_square->bind();
-			glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr);
+			renderer::submit(m_vertexArray_square);
 
 			m_Shader->bind();
-			m_vertexArray->bind();
-			glDrawElements(GL_TRIANGLES, 3, GL_UNSIGNED_INT, nullptr);
+			renderer::submit(m_vertexArray);
+			renderer::endScene();
 
 			for (layer* layer : m_layStack) {
 				layer->onUpdate();
