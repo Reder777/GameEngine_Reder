@@ -10,6 +10,7 @@ all reference and library be used by actual sandbox
 #include "reder/layer.h"
 #include "reder/imgui/imguiLayer.h"
 #include "reder/input.h"
+#include "reder/core/timeStamp.h"
 
 /*
 ---------------reder's event system ---------------------------------------

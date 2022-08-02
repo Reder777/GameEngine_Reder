@@ -1,6 +1,7 @@
 #pragma once
 #include "core.h"
-#include "event/event.h"
+#include "reder/event/event.h"
+#include "reder/core/timeStamp.h"
 
 namespace reder {
 	class DLL_API layer
@@ -9,7 +10,7 @@ namespace reder {
 		layer(const std::string& name = "layer");
 		virtual ~layer();
 		virtual void onEvent(event& e){}
-		virtual void onUpdate() {}
+		virtual void onUpdate(timeStamp t) {}
 		virtual void imguiRender(){}
 		virtual void attach() {}
 		virtual void detach() {}

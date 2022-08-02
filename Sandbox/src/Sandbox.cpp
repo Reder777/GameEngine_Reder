@@ -105,7 +105,13 @@ public:
 		
 	}
 
-	void onUpdate() override {
+	void onUpdate(reder::timeStamp t) override {
+
+		reder::renderCommand::clearColor({ 1.0f, 1.0f, 0, 1 });
+		reder::renderCommand::clear();
+
+		RE_CLIENT_INFO("{0}", t.getMillSeconds());
+
 
 		m_camera->setPostion(camera_position);
 		m_camera->setRotation(rotation);
@@ -117,24 +123,24 @@ public:
 		reder::renderer::endScene();
 
 		if (reder::input::isKeyPressed(RE_KEY_LEFT)) {
-			camera_position.x += position_speed;
+			camera_position.x += position_speed*t;
 		}
 		else if (reder::input::isKeyPressed(RE_KEY_RIGHT)) {
-			camera_position.x -= position_speed;
+			camera_position.x -= position_speed*t;
 		}
 
 		if (reder::input::isKeyPressed(RE_KEY_UP)) {
-			camera_position.y -= position_speed;
+			camera_position.y -= position_speed*t;
 		}
 		else if (reder::input::isKeyPressed(RE_KEY_DOWN)) {
-			camera_position.y += position_speed;
+			camera_position.y += position_speed*t;
 		}
 
 		if (reder::input::isKeyPressed(RE_KEY_A)) {
-			rotation -= rotation_speed;
+			rotation -= rotation_speed*t;
 		}
 		else if (reder::input::isKeyPressed(RE_KEY_D)) {
-			rotation += rotation_speed;
+			rotation += rotation_speed*t;
 		}
 	}	
 	void onEvent(reder::event& e) override {
@@ -155,8 +161,9 @@ private:
 	float rotation=0.0f;
 	glm::vec3 camera_position = { 0.0f,0.0f,0.0f };
 
-	float rotation_speed = 0.05f;
-	float position_speed = 0.1f;
+	float rotation_speed = 10.0f;
+	float position_speed = 1.0f;
+
 };
 
 

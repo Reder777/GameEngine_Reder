@@ -3,6 +3,7 @@
 
 
 #include "reder/log.h"
+#include "reder/core/timeStamp.h"
 #include "reder/renderer/renderCommand.h"
 #include "reder/renderer/renderer.h"
 
@@ -13,6 +14,7 @@
 
 
 #include <glad/glad.h>
+#include <GLFW/glfw3.h>
 
 
 
@@ -28,107 +30,12 @@ namespace reder {
 		app_Instance = this;
 		
 		m_Window = std::unique_ptr<window>(window::createWindows());
+		//m_Window->setVSync(false);
 		m_Window->setEventCallback(RE_BIND_EVENT(application::OnEvent));
 
 		m_imguiLayer = new imguiLayer();
 		pushOverLayer(m_imguiLayer);
-		m_camera.reset(new orthographicCamera(-1.6f, 1.6f, 0.9f, -0.9f));
 		
-		//m_camera->setRotation(45.0f);
-
-		m_vertexArray = std::shared_ptr<vertexArray>(vertexArray::create());
-		m_vertexArray->bind();
-
-
-		float vertices[3 * 3] = {
-			-0.5f, -0.75f, 0.0f,
-			 0.5f, -0.75f, 0.0f,
-			 0.0f,  0.75f, 0.0f
-		};
-		std::shared_ptr<vertexBuffer> vertexBuffer;
-		vertexBuffer.reset(vertexBuffer::create(vertices, sizeof(vertices)));
-
-		bufferLayout layout = {
-			{bufferElementType::Float3 , "a_Position"}
-		};
-		vertexBuffer->setLayout(layout);
-		m_vertexArray->addVertexBuffer(vertexBuffer);
-	
-	
-		unsigned int indices[3] = { 0, 1, 2 };
-		std::shared_ptr<indexBuffer> indexBuffer;
-		indexBuffer.reset((indexBuffer::create(indices, 3)));
-		m_vertexArray->setIndexBuffer(indexBuffer);
-		std::string vertexSource=R"(
-			#version 330 core
-			layout(location=0) in vec3 a_position;
-			out vec3 forfun ;
-			uniform mat4 m_viewProjection;
-			void main(){
-				forfun = a_position;
-				gl_Position = m_viewProjection*vec4(a_position,1.0);
-			}		
-		)";
-
-		std::string fragmentSource=R"(
-			#version 330 core
-			layout(location=0) out vec4 color;
-			in vec3 forfun;
-			void main() {
-				color = vec4(forfun*0.5+0.5, 1.0);
-			}
-		)";
-
-		m_Shader = std::shared_ptr<shader>(new openglShader(vertexSource,fragmentSource));
-		/*
-		m_Shader.reset(new openglShader());
-		*/
-
-		m_vertexArray_square = std::shared_ptr<vertexArray>(vertexArray::create());
-		m_vertexArray_square->bind();
-
-
-		float vertices_square[3 * 4] = {
-			-0.75f, -0.75f, 0.0f,
-			 0.75f, -0.75f, 0.0f,
-			 0.75f,  0.75f, 0.0f,
-			-0.75f,  0.75f, 0.0f
-		};
-		std::shared_ptr<reder::vertexBuffer> vertexBufferSquare;
-		vertexBufferSquare.reset(vertexBuffer::create(vertices_square, sizeof(vertices_square)));
-
-		bufferLayout layout_square = {
-			{bufferElementType::Float3 , "a_Position"}
-		};
-		vertexBufferSquare->setLayout(layout_square);
-		m_vertexArray_square->addVertexBuffer(vertexBufferSquare);
-
-
-		unsigned int indices_square[6] = { 0,1,2,2,3,0};
-		std::shared_ptr<reder::indexBuffer> indexBufferSquare;
-		indexBufferSquare.reset((indexBuffer::create(indices_square, 6)));
-		m_vertexArray_square->setIndexBuffer(indexBufferSquare);
-		std::string vertexSource_square = R"(
-			#version 330 core
-			layout(location=0) in vec3 a_position;
-			out vec3 forfun ;
-			uniform mat4 m_viewProjection;
-			void main(){
-				forfun = a_position;
-				gl_Position = m_viewProjection*vec4(a_position,1.0);
-			}		
-		)";
-
-		std::string fragmentSource_square = R"(
-			#version 330 core
-			layout(location=0) out vec4 color;
-			in vec3 forfun;
-			void main() {
-				color = vec4( 0.2, 0.3, 0.8, 1.0);
-			}
-		)";
-
-		m_Shader_square = std::shared_ptr<shader>(new openglShader(vertexSource_square, fragmentSource_square));
 	}
 
 	application::~application() {
@@ -141,13 +48,13 @@ namespace reder {
 
 		while (m_Running) {
 
-			renderCommand::clearColor({ 1.0f, 1.0f, 0, 1 });
-			renderCommand::clear();
-
-			
+			float currentTime = (float)glfwGetTime();//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+			//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!to be rewrited
+			timeStamp t = currentTime - m_lastFrameTime;
+			m_lastFrameTime = currentTime;
 
 			for (layer* layer : m_layStack) {
-				layer->onUpdate();
+				layer->onUpdate(t);
 			}
 			m_imguiLayer->begin();
 			for (layer* layer : m_layStack) {

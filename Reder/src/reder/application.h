@@ -39,22 +39,13 @@ namespace reder{
 	private:
 
 		bool windowClose(windowCloseEvent& e);
+
+	private:
 		std::unique_ptr<window> m_Window;
-		std::shared_ptr<orthographicCamera> m_camera;
-
-
-		std::shared_ptr<shader> m_Shader;
-		std::shared_ptr<vertexArray> m_vertexArray;
-
-
-		std::shared_ptr<shader> m_Shader_square;
-		std::shared_ptr<vertexArray> m_vertexArray_square;
-
-
 		imguiLayer* m_imguiLayer;
 		bool m_Running = true;
 		layerStack m_layStack;
-
+		float m_lastFrameTime = 0.0f;
 		static application* app_Instance;
 	};
 

@@ -524,6 +524,7 @@
     <ClInclude Include="src\reder\codesDef\keyCodes.h" />
     <ClInclude Include="src\reder\codesDef\mouseButton.h" />
     <ClInclude Include="src\reder\core.h" />
+    <ClInclude Include="src\reder\core\timeStamp.h" />
     <ClInclude Include="src\reder\entryPoint.h" />
     <ClInclude Include="src\reder\event\appEvent.h" />
     <ClInclude Include="src\reder\event\event.h" />

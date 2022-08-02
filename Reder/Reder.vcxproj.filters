@@ -1363,6 +1363,7 @@
     <ClInclude Include="src\platform\openGL\openglRendererAPI.h" />
     <ClInclude Include="src\reder\renderer\renderer.h" />
     <ClInclude Include="src\reder\renderer\orthpgraphicCamera.h" />
+    <ClInclude Include="src\reder\core\timeStamp.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\platform\windows\windowsInput.cpp">
