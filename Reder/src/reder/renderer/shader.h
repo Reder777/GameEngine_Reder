@@ -12,9 +12,14 @@ namespace reder {
 		shader() {};
 		~shader() {};
 
-		virtual void bind() const =0;
-		virtual void unbind() const =0;
+		virtual void bind() const {};
+		virtual void unbind() const {};
 
-		virtual void uploadUniformMat4(const std::string& name, const glm::mat4& matrix) const = 0;
+		virtual void uploadUniformMat4(const std::string& name, const glm::mat4& matrix) const {};
+		static shader* createShader(const std::string& vertexSource, const std::string& fragmentSource);
+
+	private:
 	};
+
+
 }

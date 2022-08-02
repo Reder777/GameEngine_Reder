@@ -27,15 +27,14 @@ namespace reder {
 		RE_CORE_ASSERT(!app_Instance, "app already exists!");
 		app_Instance = this;
 		
-
 		m_Window = std::unique_ptr<window>(window::createWindows());
 		m_Window->setEventCallback(RE_BIND_EVENT(application::OnEvent));
-		m_camera.reset(new orthographicCamera(-1.6f, 1.6f, 0.9f, -0.9f));
-		
-		//m_camera->setRotation(45.0f);
 
 		m_imguiLayer = new imguiLayer();
 		pushOverLayer(m_imguiLayer);
+		m_camera.reset(new orthographicCamera(-1.6f, 1.6f, 0.9f, -0.9f));
+		
+		//m_camera->setRotation(45.0f);
 
 		m_vertexArray = std::shared_ptr<vertexArray>(vertexArray::create());
 		m_vertexArray->bind();
@@ -145,10 +144,7 @@ namespace reder {
 			renderCommand::clearColor({ 1.0f, 1.0f, 0, 1 });
 			renderCommand::clear();
 
-			renderer::beginScene(m_camera);
-			renderer::submit(m_Shader_square,m_vertexArray_square);
-			renderer::submit(m_Shader,m_vertexArray);
-			renderer::endScene();
+			
 
 			for (layer* layer : m_layStack) {
 				layer->onUpdate();
@@ -176,9 +172,6 @@ namespace reder {
 	void application::OnEvent(event& e) {
 		eventDispatcher m_eventDispatcher(e);
 		m_eventDispatcher.Dispatch<windowCloseEvent>(RE_BIND_EVENT(application::windowClose));
-#if SHOW_ALL_DEBUG_INFO
-		RE_CORE_INFO("{0}", e);
-#endif // SHOW_ALL_DEBUG_INFO
 
 		
 		for (auto it = m_layStack.end(); it != m_layStack.begin();) {

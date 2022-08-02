@@ -566,6 +566,7 @@
     <ClCompile Include="src\reder\renderer\renderCommand.cpp" />
     <ClCompile Include="src\reder\renderer\renderer.cpp" />
     <ClCompile Include="src\reder\renderer\rendererAPI.cpp" />
+    <ClCompile Include="src\reder\renderer\shader.cpp" />
     <ClCompile Include="src\reder\renderer\vertexArray.cpp" />
     <ClCompile Include="src\repch.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>

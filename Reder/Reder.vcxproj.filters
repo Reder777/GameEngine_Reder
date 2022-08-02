@@ -1404,5 +1404,6 @@
     <ClCompile Include="src\reder\renderer\renderer.cpp" />
     <ClCompile Include="src\reder\renderer\orthographicCamera.cpp" />
     <ClCompile Include="src\reder\renderer\orthpgraphicCamera.cpp" />
+    <ClCompile Include="src\reder\renderer\shader.cpp" />
   </ItemGroup>
 </Project>
