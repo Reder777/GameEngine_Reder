@@ -537,6 +537,7 @@
     <ClInclude Include="src\reder\log.h" />
     <ClInclude Include="src\reder\renderer\buffers.h" />
     <ClInclude Include="src\reder\renderer\grahpicsContext.h" />
+    <ClInclude Include="src\reder\renderer\orthpgraphicCamera.h" />
     <ClInclude Include="src\reder\renderer\renderCommand.h" />
     <ClInclude Include="src\reder\renderer\renderer.h" />
     <ClInclude Include="src\reder\renderer\rendererAPI.h" />
@@ -560,6 +561,8 @@
     <ClCompile Include="src\reder\layerStack.cpp" />
     <ClCompile Include="src\reder\log.cpp" />
     <ClCompile Include="src\reder\renderer\buffers.cpp" />
+    <ClCompile Include="src\reder\renderer\orthographicCamera.cpp" />
+    <ClCompile Include="src\reder\renderer\orthpgraphicCamera.cpp" />
     <ClCompile Include="src\reder\renderer\renderCommand.cpp" />
     <ClCompile Include="src\reder\renderer\renderer.cpp" />
     <ClCompile Include="src\reder\renderer\rendererAPI.cpp" />

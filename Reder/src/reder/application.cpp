@@ -30,6 +30,9 @@ namespace reder {
 
 		m_Window = std::unique_ptr<window>(window::createWindows());
 		m_Window->setEventCallback(RE_BIND_EVENT(application::OnEvent));
+		m_camera.reset(new orthographicCamera(-1.6f, 1.6f, 0.9f, -0.9f));
+		
+		//m_camera->setRotation(45.0f);
 
 		m_imguiLayer = new imguiLayer();
 		pushOverLayer(m_imguiLayer);
@@ -61,9 +64,10 @@ namespace reder {
 			#version 330 core
 			layout(location=0) in vec3 a_position;
 			out vec3 forfun ;
+			uniform mat4 m_viewProjection;
 			void main(){
 				forfun = a_position;
-				gl_Position = vec4(a_position,1.0);
+				gl_Position = m_viewProjection*vec4(a_position,1.0);
 			}		
 		)";
 
@@ -76,7 +80,7 @@ namespace reder {
 			}
 		)";
 
-		m_Shader = std::unique_ptr<shader>(new openglShader(vertexSource,fragmentSource));
+		m_Shader = std::shared_ptr<shader>(new openglShader(vertexSource,fragmentSource));
 		/*
 		m_Shader.reset(new openglShader());
 		*/
@@ -109,9 +113,10 @@ namespace reder {
 			#version 330 core
 			layout(location=0) in vec3 a_position;
 			out vec3 forfun ;
+			uniform mat4 m_viewProjection;
 			void main(){
 				forfun = a_position;
-				gl_Position = vec4(a_position,1.0);
+				gl_Position = m_viewProjection*vec4(a_position,1.0);
 			}		
 		)";
 
@@ -124,7 +129,7 @@ namespace reder {
 			}
 		)";
 
-		m_Shader_square = std::unique_ptr<shader>(new openglShader(vertexSource_square, fragmentSource_square));
+		m_Shader_square = std::shared_ptr<shader>(new openglShader(vertexSource_square, fragmentSource_square));
 	}
 
 	application::~application() {
@@ -140,12 +145,9 @@ namespace reder {
 			renderCommand::clearColor({ 1.0f, 1.0f, 0, 1 });
 			renderCommand::clear();
 
-			renderer::beginScene();
-			m_Shader_square->bind();
-			renderer::submit(m_vertexArray_square);
-
-			m_Shader->bind();
-			renderer::submit(m_vertexArray);
+			renderer::beginScene(m_camera);
+			renderer::submit(m_Shader_square,m_vertexArray_square);
+			renderer::submit(m_Shader,m_vertexArray);
 			renderer::endScene();
 
 			for (layer* layer : m_layStack) {

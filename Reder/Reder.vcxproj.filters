@@ -1362,6 +1362,7 @@
     <ClInclude Include="src\reder\renderer\renderCommand.h" />
     <ClInclude Include="src\platform\openGL\openglRendererAPI.h" />
     <ClInclude Include="src\reder\renderer\renderer.h" />
+    <ClInclude Include="src\reder\renderer\orthpgraphicCamera.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\platform\windows\windowsInput.cpp">
@@ -1401,5 +1402,7 @@
     <ClCompile Include="src\reder\renderer\renderCommand.cpp" />
     <ClCompile Include="src\platform\openGL\openglRendererAPI.cpp" />
     <ClCompile Include="src\reder\renderer\renderer.cpp" />
+    <ClCompile Include="src\reder\renderer\orthographicCamera.cpp" />
+    <ClCompile Include="src\reder\renderer\orthpgraphicCamera.cpp" />
   </ItemGroup>
 </Project>

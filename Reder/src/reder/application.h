@@ -9,6 +9,7 @@
 #include "reder/renderer/shader.h"
 #include "reder/renderer/buffers.h"
 #include "reder/renderer/vertexArray.h"
+#include "reder/renderer/orthpgraphicCamera.h"
 
 
 namespace reder{
@@ -22,6 +23,7 @@ namespace reder{
 
 		void run();
 
+		//deal with events
 		void OnEvent(event& e);
 
 		void popLayer(layer* layer);
@@ -38,13 +40,14 @@ namespace reder{
 
 		bool windowClose(windowCloseEvent& e);
 		std::unique_ptr<window> m_Window;
+		std::shared_ptr<orthographicCamera> m_camera;
 
 
-		std::unique_ptr<shader> m_Shader;
+		std::shared_ptr<shader> m_Shader;
 		std::shared_ptr<vertexArray> m_vertexArray;
 
 
-		std::unique_ptr<shader> m_Shader_square;
+		std::shared_ptr<shader> m_Shader_square;
 		std::shared_ptr<vertexArray> m_vertexArray_square;
 
 
@@ -52,9 +55,6 @@ namespace reder{
 		bool m_Running = true;
 		layerStack m_layStack;
 
-
-		//singleton 
-		// initialized in application.cpp application() constructor
 		static application* app_Instance;
 	};
 
