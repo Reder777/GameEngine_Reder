@@ -1,6 +1,12 @@
 #include "reder.h"
 #include "imgui.h"
 
+#include "platform/openGL/openglShader.h"
+
+#include <glm/glm.hpp>
+#include <glm/gtc/type_ptr.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+
 class exampleLayer :public reder::layer {
 public:
 
@@ -94,17 +100,20 @@ public:
 			#version 330 core
 			layout(location=0) out vec4 color;
 			in vec3 forfun;
+			uniform vec3 m_color;
 			void main() {
-				color = vec4( 0.2, 0.3, 0.8, 1.0);
+				color = vec4( m_color, 1.0);
 			}
 		)";
 
 		m_Shader_square = std::shared_ptr<reder::shader>(reder::shader::createShader(vertexSource_square, fragmentSource_square));
-
+		m_squareColor = glm::vec3(0.2f, 0.3f, 0.8f);
 	}
 
 	virtual void imguiRender() override {
-		
+		ImGui::Begin("color settings");
+		ImGui::ColorEdit3("square color", glm::value_ptr(m_squareColor));
+		ImGui::End();
 	}
 
 	void onUpdate(reder::timeStamp t) override {
@@ -112,12 +121,13 @@ public:
 		reder::renderCommand::clearColor({ 0.1f, 0.1f, 0.1f, 1 });
 		reder::renderCommand::clear();
 		//RE_CLIENT_INFO("{0}", t.getMillSeconds());
-
-
+		static glm::vec4 blueColor(0.2f, 0.3f, 0.8f,1.0f);
+		static glm::vec4 redColor(0.8f, 0.3f, 0.2f,1.0f);
 		m_camera->setPostion(camera_position);
 		m_camera->setRotation(rotation);
 
-
+		std::dynamic_pointer_cast<reder::openglShader>(m_Shader_square)->bind();
+		std::dynamic_pointer_cast<reder::openglShader>(m_Shader_square)->uploadUniformFloat3("m_color", m_squareColor);
 		reder::renderer::beginScene(m_camera);
 		for (int i = 0; i < 10; i++) {
 			glm::vec3 v = glm::vec3(i * 1.1f, 0.0f, 0.0f);
@@ -172,6 +182,8 @@ private:
 
 	glm::mat4 transform=glm::mat4(1.0f);
 	const glm::mat4 identityMatrix = glm::mat4(1.0f);
+
+	glm::vec3 m_squareColor;
 };
 
 
