@@ -12,11 +12,11 @@ namespace reder {
 	void renderer::endScene()
 	{
 	}
-	void renderer::submit(const std::shared_ptr<shader>& s,const std::shared_ptr<vertexArray>& vA)
+	void renderer::submit(const std::shared_ptr<shader>& s,const std::shared_ptr<vertexArray>& vA,const glm::mat4& transform)
 	{
 		s->bind();
 		s->uploadUniformMat4("m_viewProjection", m_sceneData->viewProjectionMatrix);
-
+		s->uploadUniformMat4("m_transform", transform);
 
 		vA->bind();
 		renderCommand::drawIndex(vA);

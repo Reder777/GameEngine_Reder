@@ -562,7 +562,6 @@
     <ClCompile Include="src\reder\layerStack.cpp" />
     <ClCompile Include="src\reder\log.cpp" />
     <ClCompile Include="src\reder\renderer\buffers.cpp" />
-    <ClCompile Include="src\reder\renderer\orthographicCamera.cpp" />
     <ClCompile Include="src\reder\renderer\orthpgraphicCamera.cpp" />
     <ClCompile Include="src\reder\renderer\renderCommand.cpp" />
     <ClCompile Include="src\reder\renderer\renderer.cpp" />

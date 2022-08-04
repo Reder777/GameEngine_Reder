@@ -11,7 +11,6 @@ public:
 		m_vertexArray = std::shared_ptr<reder::vertexArray>(reder::vertexArray::create());
 		m_vertexArray->bind();
 
-
 		float vertices[3 * 3] = {
 			-0.5f, -0.75f, 0.0f,
 			 0.5f, -0.75f, 0.0f,
@@ -36,9 +35,10 @@ public:
 			layout(location=0) in vec3 a_position;
 			out vec3 forfun ;
 			uniform mat4 m_viewProjection;
+			uniform mat4 m_transform;
 			void main(){
 				forfun = a_position;
-				gl_Position = m_viewProjection*vec4(a_position,1.0);
+				gl_Position = m_viewProjection*m_transform*vec4(a_position,1.0);
 			}		
 		)";
 
@@ -59,10 +59,10 @@ public:
 
 
 		float vertices_square[3 * 4] = {
-			-0.75f, -0.75f, 0.0f,
-			 0.75f, -0.75f, 0.0f,
-			 0.75f,  0.75f, 0.0f,
-			-0.75f,  0.75f, 0.0f
+			-0.5f, -0.5f, 0.0f,
+			 0.5f, -0.5f, 0.0f,
+			 0.5f,  0.5f, 0.0f,
+			-0.5f,  0.5f, 0.0f
 		};
 		std::shared_ptr<reder::vertexBuffer> vertexBufferSquare;
 		vertexBufferSquare.reset(reder::vertexBuffer::create(vertices_square, sizeof(vertices_square)));
@@ -83,9 +83,10 @@ public:
 			layout(location=0) in vec3 a_position;
 			out vec3 forfun ;
 			uniform mat4 m_viewProjection;
+			uniform mat4 m_transform;
 			void main(){
 				forfun = a_position;
-				gl_Position = m_viewProjection*vec4(a_position,1.0);
+				gl_Position = m_viewProjection*m_transform*vec4(a_position,1.0);
 			}		
 		)";
 
@@ -99,6 +100,7 @@ public:
 		)";
 
 		m_Shader_square = std::shared_ptr<reder::shader>(reder::shader::createShader(vertexSource_square, fragmentSource_square));
+
 	}
 
 	virtual void imguiRender() override {
@@ -107,10 +109,9 @@ public:
 
 	void onUpdate(reder::timeStamp t) override {
 
-		reder::renderCommand::clearColor({ 1.0f, 1.0f, 0, 1 });
+		reder::renderCommand::clearColor({ 0.1f, 0.1f, 0.1f, 1 });
 		reder::renderCommand::clear();
-
-		RE_CLIENT_INFO("{0}", t.getMillSeconds());
+		//RE_CLIENT_INFO("{0}", t.getMillSeconds());
 
 
 		m_camera->setPostion(camera_position);
@@ -118,8 +119,12 @@ public:
 
 
 		reder::renderer::beginScene(m_camera);
-		reder::renderer::submit(m_Shader_square, m_vertexArray_square);
-		reder::renderer::submit(m_Shader, m_vertexArray);
+		for (int i = 0; i < 10; i++) {
+			glm::vec3 v = glm::vec3(i * 1.1f, 0.0f, 0.0f);
+			transform = glm::translate(glm::scale(glm::mat4(1.0f),glm::vec3(0.1f)), v);
+			reder::renderer::submit(m_Shader_square, m_vertexArray_square,transform);
+		}
+		//reder::renderer::submit(m_Shader, m_vertexArray);
 		reder::renderer::endScene();
 
 		if (reder::input::isKeyPressed(RE_KEY_LEFT)) {
@@ -164,6 +169,9 @@ private:
 	float rotation_speed = 10.0f;
 	float position_speed = 1.0f;
 
+
+	glm::mat4 transform=glm::mat4(1.0f);
+	const glm::mat4 identityMatrix = glm::mat4(1.0f);
 };
 
 

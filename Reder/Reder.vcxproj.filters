@@ -1403,7 +1403,6 @@
     <ClCompile Include="src\reder\renderer\renderCommand.cpp" />
     <ClCompile Include="src\platform\openGL\openglRendererAPI.cpp" />
     <ClCompile Include="src\reder\renderer\renderer.cpp" />
-    <ClCompile Include="src\reder\renderer\orthographicCamera.cpp" />
     <ClCompile Include="src\reder\renderer\orthpgraphicCamera.cpp" />
     <ClCompile Include="src\reder\renderer\shader.cpp" />
   </ItemGroup>
