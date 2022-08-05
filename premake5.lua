@@ -16,6 +16,7 @@ IncludeDir["GLFW"] = "Reder/modules/glfw/include"
 IncludeDir["GLAD"] = "Reder/modules/glad/include"
 IncludeDir["IMGUI"] = "Reder/modules/imgui"
 IncludeDir["GLM"] ="Reder/modules/glm"
+IncludeDir["STB"] ="Reder/modules/stb"
 
 
 include "Reder/modules/glfw"
@@ -40,7 +41,9 @@ project "Reder"
         "%{prj.name}/src/**.h",
         "%{prj.name}/src/**.cpp", 
         "%{prj.name}/modules/glm/glm/**.hpp",
-        "%{prj.name}/modules/glm/glm/**.inl"
+        "%{prj.name}/modules/glm/glm/**.inl",
+        "%{prj.name}/modules/stb/**.cpp",
+        "%{prj.name}/modules/stb/**.h"
     }
     pchheader "repch.h"
     pchsource "Reder/src/repch.cpp"
@@ -50,7 +53,8 @@ project "Reder"
         "%{IncludeDir.GLFW}",
         "%{IncludeDir.GLAD}",
         "%{IncludeDir.IMGUI}",
-        "%{IncludeDir.GLM}"
+        "%{IncludeDir.GLM}",
+        "%{IncludeDir.STB}"
     }
     links{
         "GLFW",

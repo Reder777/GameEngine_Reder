@@ -59,9 +59,10 @@ namespace reder {
 				element.getComponentCount(),
 				elementTypeToGLenum(element.type),
 				element.normalized? GL_TRUE:GL_FALSE,
-				element.size,
+				layout.getStride(),
 				(const void*)element.offset
 			);
+			index++;
 		}
 		m_vertexBuffers.push_back(vb);
 	}

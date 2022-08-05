@@ -58,7 +58,7 @@
       <PrecompiledHeaderFile>repch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>RE_PLATFORM_WINDOWS;RE_DLL_BUILD;GLFW_INCLUDE_NONE;IMGUI_API=__declspec(dllexport);RE_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>src;modules\spdlog\include;modules\glfw\include;modules\glad\include;modules\imgui;modules\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>src;modules\spdlog\include;modules\glfw\include;modules\glad\include;modules\imgui;modules\glm;modules\stb;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
@@ -78,7 +78,7 @@
       <PrecompiledHeaderFile>repch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>RE_PLATFORM_WINDOWS;RE_DLL_BUILD;GLFW_INCLUDE_NONE;IMGUI_API=__declspec(dllexport);RE_RELEASE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>src;modules\spdlog\include;modules\glfw\include;modules\glad\include;modules\imgui;modules\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>src;modules\spdlog\include;modules\glfw\include;modules\glad\include;modules\imgui;modules\glm;modules\stb;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
@@ -512,10 +512,12 @@
     <ClInclude Include="modules\glm\glm\vec3.hpp" />
     <ClInclude Include="modules\glm\glm\vec4.hpp" />
     <ClInclude Include="modules\glm\glm\vector_relational.hpp" />
+    <ClInclude Include="modules\stb\stb_image.h" />
     <ClInclude Include="src\platform\openGL\openglBuffer.h" />
     <ClInclude Include="src\platform\openGL\openglContext.h" />
     <ClInclude Include="src\platform\openGL\openglRendererAPI.h" />
     <ClInclude Include="src\platform\openGL\openglShader.h" />
+    <ClInclude Include="src\platform\openGL\openglTexture.h" />
     <ClInclude Include="src\platform\openGL\openglVertexArray.h" />
     <ClInclude Include="src\platform\windows\windowsInput.h" />
     <ClInclude Include="src\platform\windows\windowsWindow.h" />
@@ -543,15 +545,18 @@
     <ClInclude Include="src\reder\renderer\renderer.h" />
     <ClInclude Include="src\reder\renderer\rendererAPI.h" />
     <ClInclude Include="src\reder\renderer\shader.h" />
+    <ClInclude Include="src\reder\renderer\texture.h" />
     <ClInclude Include="src\reder\renderer\vertexArray.h" />
     <ClInclude Include="src\reder\window.h" />
     <ClInclude Include="src\repch.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="modules\stb\stb_image.cpp" />
     <ClCompile Include="src\platform\openGL\openglBuffer.cpp" />
     <ClCompile Include="src\platform\openGL\openglContext.cpp" />
     <ClCompile Include="src\platform\openGL\openglRendererAPI.cpp" />
     <ClCompile Include="src\platform\openGL\openglShader.cpp" />
+    <ClCompile Include="src\platform\openGL\openglTexture.cpp" />
     <ClCompile Include="src\platform\openGL\openglVertexArray.cpp" />
     <ClCompile Include="src\platform\windows\windowsInput.cpp" />
     <ClCompile Include="src\platform\windows\windowsWindow.cpp" />
@@ -567,6 +572,7 @@
     <ClCompile Include="src\reder\renderer\renderer.cpp" />
     <ClCompile Include="src\reder\renderer\rendererAPI.cpp" />
     <ClCompile Include="src\reder\renderer\shader.cpp" />
+    <ClCompile Include="src\reder\renderer\texture.cpp" />
     <ClCompile Include="src\reder\renderer\vertexArray.cpp" />
     <ClCompile Include="src\repch.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>

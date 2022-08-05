@@ -86,6 +86,7 @@ namespace reder {
 		{
 			calculateOffsetAndStride();
 		}
+		inline uint32_t getStride() const { return m_stride; }
 		inline const std::vector<bufferElement>& getElements() const { return m_elements; }
 		std::vector<bufferElement>::iterator begin() { return m_elements.begin(); }
 		std::vector<bufferElement>::iterator end()   { return m_elements.end(); }
@@ -95,6 +96,7 @@ namespace reder {
 	private:
 		void calculateOffsetAndStride() {
 			RE_BUFFER_INT offset=0;
+			m_stride = 0;
 			for (auto& element : m_elements) {
 				element.offset = offset;
 				offset += element.size;

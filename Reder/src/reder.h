@@ -40,6 +40,7 @@ all reference and library be used by actual sandbox
 #include "reder/renderer/grahpicsContext.h"
 #include "reder/renderer/vertexArray.h"
 #include "reder/renderer/renderCommand.h"
+#include "reder/renderer/texture.h"
 
 /*
 ---------------entry point ------------------------------------------------
