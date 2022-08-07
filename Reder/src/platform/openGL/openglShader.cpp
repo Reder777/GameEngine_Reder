@@ -5,6 +5,13 @@
 
 namespace reder {
 
+	static std::string pathToName(const std::string& filePath) {
+		int begin = filePath.find_last_of("/\\");
+		RE_CORE_ASSERT(begin == filePath.npos, "wrong file path!");
+		int end = filePath.find_first_of(".") == filePath.npos ? filePath.size() - 1 : filePath.find_first_of(".");
+		return filePath.substr(begin + 1, end - begin - 1);
+	}
+
 	static GLenum ShaderTypeFromString(const std::string& type)
 	{
 		if (type == "vertex")
@@ -16,29 +23,43 @@ namespace reder {
 		return 0;
 	}
 
-
 	openglShader::openglShader(const std::string& filePath)
+	{
+		m_name = pathToName(filePath);
+		std::string source = readFile(filePath);
+		RE_CORE_INFO(source);
+		auto shaderSources = preProcess(source);
+		compile(shaderSources);
+	}
+
+	openglShader::openglShader(const std::string& name,const std::string& filePath)
+		:m_name(name)
 	{
 		std::string source = readFile(filePath);
 		RE_CORE_INFO(source);
 		auto shaderSources = preProcess(source);
 		compile(shaderSources);
 	}
-	openglShader::openglShader(const std::string& vertexSource, const std::string& fragmentSource)
+
+	openglShader::openglShader(const std::string& name,const std::string& vertexSource, const std::string& fragmentSource)
+		:m_name(name)
 	{
 		std::unordered_map<GLenum, std::string> sources;
 		sources[GL_VERTEX_SHADER] = vertexSource;
 		sources[GL_FRAGMENT_SHADER] = fragmentSource;
 		compile(sources);
 	}
+	
 	openglShader::~openglShader()
 	{
 		glDeleteProgram(m_RendererId);
 	}
+	
 	void openglShader::bind() const
 	{
 		glUseProgram(m_RendererId);
 	}
+	
 	void openglShader::unbind() const
 	{
 		glUseProgram(0);
@@ -52,43 +73,47 @@ namespace reder {
 		GLint location = glGetUniformLocation(m_RendererId, name.c_str());
 		glUniformMatrix4fv(location, 1, GL_FALSE, glm::value_ptr(matrix));
 	}
+	
 	void openglShader::uploadUniformMat3(const std::string& name, const glm::mat3& matrix) const
 	{
 		GLint location = glGetUniformLocation(m_RendererId, name.c_str());
 		glUniformMatrix3fv(location, 1, GL_FALSE, glm::value_ptr(matrix));
 	}
+	
 	void openglShader::uploadUniformFloat4(const std::string& name, const glm::vec4& value) const
 	{
 		GLint location = glGetUniformLocation(m_RendererId, name.c_str());
 		glUniform4f(location, value.x,value.y,value.z,value.w);
 	}
+	
 	void openglShader::uploadUniformFloat3(const std::string& name, const glm::vec3& value) const
 	{
 		GLint location = glGetUniformLocation(m_RendererId, name.c_str());
 		glUniform3f(location, value.x, value.y, value.z);
 	}
+	
 	void openglShader::uploadUniformFloat2(const std::string& name, const glm::vec2& value) const
 	{
 		GLint location = glGetUniformLocation(m_RendererId, name.c_str());
 		glUniform2f(location, value.x, value.y);
 	}
+	
 	void openglShader::uploadUniformFloat(const std::string& name, float value) const
 	{
 		GLint location = glGetUniformLocation(m_RendererId, name.c_str());
 		glUniform1f(location, value);
 	}
+	
 	void openglShader::uploadUniformInt(const std::string& name, int value) const
 	{
 		GLint location = glGetUniformLocation(m_RendererId, name.c_str());
 		glUniform1i(location, value);
 	}
 
-
-
 	std::string openglShader::readFile(const std::string& filepath)
 	{
 		std::string result;
-		std::ifstream in(filepath, std::ios::in);
+		std::ifstream in(filepath, std::ios::in|std::ios::binary);
 		if (in)
 		{
 			in.seekg(0, std::ios::end);
@@ -104,6 +129,7 @@ namespace reder {
 
 		return result;
 	}
+	
 	std::unordered_map<GLenum, std::string> openglShader::preProcess(const std::string& source)
 	{
 		std::unordered_map<GLenum, std::string> shaderSources;
@@ -126,10 +152,13 @@ namespace reder {
 
 		return shaderSources;
 	}
+	
 	void openglShader::compile(const std::unordered_map<GLenum, std::string>& shaderSources)
 	{
 		GLuint program = glCreateProgram();
-		std::vector<GLenum> glShaderIDs(shaderSources.size());
+		RE_CORE_ASSERT(shaderSources.size <= 2, "we only support 2 shaders for now!");
+		std::array<GLenum,2> glShaderIDs;
+		int glShaderIDIndex = 0;
 		for (auto& kv : shaderSources)
 		{
 			GLenum type = kv.first;
@@ -160,7 +189,7 @@ namespace reder {
 			}
 
 			glAttachShader(program, shader);
-			glShaderIDs.push_back(shader);
+			glShaderIDs[glShaderIDIndex++]=shader;
 		}
 
 		m_RendererId = program;

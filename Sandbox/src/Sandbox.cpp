@@ -6,8 +6,8 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/type_ptr.hpp>
 #include <glm/gtc/matrix_transform.hpp>
-#include  <direct.h>  
-#include  <stdio.h> 
+#include <direct.h>  
+#include <stdio.h> 
 
 
 
@@ -22,7 +22,7 @@ public:
 		//getcwd(buffer, MAX_PATH);
 		//RE_CLIENT_INFO(buffer);
 
-
+		m_shaderLibrary.reset(new reder::shaderLibrary());
 		m_camera.reset(new reder::orthographicCamera(-1.6f, 1.6f, 0.9f, -0.9f));
 		{
 			m_vertexArray = std::shared_ptr<reder::vertexArray>(reder::vertexArray::create());
@@ -67,7 +67,6 @@ public:
 			}
 		)";
 
-			m_Shader = std::shared_ptr<reder::shader>(reder::shader::createShader(vertexSource, fragmentSource));
 		}
 		{
 			m_vertexArray_square = std::shared_ptr<reder::vertexArray>(reder::vertexArray::create());
@@ -113,16 +112,17 @@ public:
 					color = vec4( m_color, 1.0);
 				}
 			)";
-
-			m_Shader_square = std::shared_ptr<reder::shader>(reder::shader::createShader(vertexSource_square, fragmentSource_square));
 			m_squareColor = glm::vec3(0.2f, 0.3f, 0.8f);
 
 		}
 		
 
-		m_Shader_Texture.reset(reder::shader::createShader("assets/shaderfiles/texture.glsl"));
+		m_shaderLibrary->loadShader("fragment","assets/shaderfiles/fragment.glsl");
+
+		m_shaderLibrary->loadShader("assets/shaderfiles/texture.glsl");
 		m_texture = reder::texture2D::createTexture("assets/4.jpg");
 
+		auto m_Shader_Texture = m_shaderLibrary->getByName("texture");
 		std::dynamic_pointer_cast<reder::openglShader>(m_Shader_Texture)->bind();
 		std::dynamic_pointer_cast<reder::openglShader>(m_Shader_Texture)->uploadUniformInt("u_Texture", 0);
 		
@@ -143,7 +143,8 @@ public:
 		//RE_CLIENT_INFO("{0}", t.getMillSeconds());
 		//static glm::vec4 blueColor(0.2f, 0.3f, 0.8f,1.0f);
 		//static glm::vec4 redColor(0.8f, 0.3f, 0.2f,1.0f);
-
+		auto m_Shader_square = m_shaderLibrary->getByName("fragment");
+		auto m_Shader_Texture = m_shaderLibrary->getByName("texture");
 		std::dynamic_pointer_cast<reder::openglShader>(m_Shader_square)->bind();
 		std::dynamic_pointer_cast<reder::openglShader>(m_Shader_square)->uploadUniformFloat3("m_color", m_squareColor);
 		reder::renderer::beginScene(m_camera);
@@ -187,17 +188,9 @@ public:
 private:
 	std::shared_ptr<reder::orthographicCamera> m_camera;
 
-
-	std::shared_ptr<reder::shader> m_Shader;
 	std::shared_ptr<reder::vertexArray> m_vertexArray;
-
-
-	std::shared_ptr<reder::shader> m_Shader_square;
 	std::shared_ptr<reder::vertexArray> m_vertexArray_square;
 
-
-	std::shared_ptr<reder::shader> m_Shader_Texture;
-	std::shared_ptr<reder::shader> m_Shader_Test;
 	reder::ref<reder::texture2D> m_texture;
 
 	float rotation=0.0f;
@@ -209,8 +202,9 @@ private:
 
 	glm::mat4 transform=glm::mat4(1.0f);
 	const glm::mat4 identityMatrix = glm::mat4(1.0f);
-
 	glm::vec3 m_squareColor;
+
+	reder::ref<reder::shaderLibrary> m_shaderLibrary;
 };
 
 

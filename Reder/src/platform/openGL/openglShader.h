@@ -14,12 +14,14 @@ namespace reder {
 
 	class DLL_API openglShader :public shader {
 	public:
-		openglShader(const std::string& vertexSource, const std::string& fragmentSource);
+		openglShader(const std::string& name,const std::string& vertexSource, const std::string& fragmentSource);
+		openglShader(const std::string& name,const std::string& filePath);
 		openglShader(const std::string& filePath);
 		~openglShader();
 
 		virtual void bind() const override;
 		virtual void unbind() const override;
+		inline virtual std::string getName()const override { return m_name; }
 
 		void uploadUniformMat4(const std::string& name, const glm::mat4& matrix) const;
 		void uploadUniformMat3(const std::string& name, const glm::mat3& matrix) const;
@@ -36,5 +38,6 @@ namespace reder {
 		void compile(const std::unordered_map<GLenum, std::string>& shaderSources);
 	private:
 		uint32_t m_RendererId;
+		std::string m_name;
 	};
 }

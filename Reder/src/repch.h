@@ -21,6 +21,7 @@ precompile header file
 #include <unordered_set>
 #include <vector>
 #include <fstream>
+#include <array>
 
 #ifdef RE_PLATFORM_WINDOWS
 	#include <Windows.h>
