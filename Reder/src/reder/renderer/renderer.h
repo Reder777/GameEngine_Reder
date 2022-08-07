@@ -9,6 +9,7 @@ namespace reder {
 	class DLL_API renderer {
 
 	public:
+		static void init();
 		static void beginScene(const std::shared_ptr<orthographicCamera>& oC);
 		static void endScene();
 

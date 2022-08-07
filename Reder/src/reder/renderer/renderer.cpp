@@ -7,6 +7,11 @@
 namespace reder {
 	renderer::sceneData* renderer::m_sceneData = new renderer::sceneData();
 
+	void renderer::init()
+	{
+		renderCommand::init();
+	}
+
 	void renderer::beginScene(const std::shared_ptr<orthographicCamera>& oC)
 	{
 		m_sceneData->viewProjectionMatrix = oC->getViewProjectionMatrix();

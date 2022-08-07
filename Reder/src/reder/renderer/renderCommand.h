@@ -7,6 +7,9 @@
 namespace reder {
 	class DLL_API renderCommand {
 	public:
+		inline static void init() {
+			m_rendererAPI->init();
+		}
 		inline static void clear() {
 			m_rendererAPI->clear();
 		}

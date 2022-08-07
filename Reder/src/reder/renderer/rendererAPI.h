@@ -14,6 +14,7 @@ namespace reder {
 
 	class rendererAPI {
 	public:
+		virtual void init() = 0;
 		inline static renderGraphicsLibrary getLibrary() {
 			return library_used;
 		}
