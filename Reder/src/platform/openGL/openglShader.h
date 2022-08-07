@@ -5,11 +5,17 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
+
+
+// TODO: REMOVE!
+typedef unsigned int GLenum;
+
 namespace reder {
 
 	class DLL_API openglShader :public shader {
 	public:
 		openglShader(const std::string& vertexSource, const std::string& fragmentSource);
+		openglShader(const std::string& filePath);
 		~openglShader();
 
 		virtual void bind() const override;
@@ -23,6 +29,11 @@ namespace reder {
 
 		void uploadUniformFloat(const std::string& name, float value) const;
 		void uploadUniformInt(const std::string& name, int value) const;
+
+	private:
+		std::string readFile(const std::string& filepath);
+		std::unordered_map<GLenum, std::string> preProcess(const std::string& source);
+		void compile(const std::unordered_map<GLenum, std::string>& shaderSources);
 	private:
 		uint32_t m_RendererId;
 	};

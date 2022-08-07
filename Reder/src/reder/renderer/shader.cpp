@@ -18,4 +18,16 @@ namespace reder {
         RE_CORE_ASSERT(false, "createShader::create : unknown graphics library!");
         return nullptr;
 	}
+    shader* shader::createShader(const std::string& filePath)
+    {
+        switch (rendererAPI::getLibrary()) {
+        case renderGraphicsLibrary::None:
+            RE_CORE_ASSERT(false, "createShader::create : no render graphics library!");
+            break;
+        case renderGraphicsLibrary::Opengl:
+            return new openglShader(filePath);
+        }
+        RE_CORE_ASSERT(false, "createShader::create : unknown graphics library!");
+        return nullptr;
+    }
 }

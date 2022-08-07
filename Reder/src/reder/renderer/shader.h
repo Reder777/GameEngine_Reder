@@ -15,7 +15,7 @@ namespace reder {
 		virtual void unbind() const =0;
 
 		static shader* createShader(const std::string& vertexSource, const std::string& fragmentSource);
-
+		static shader* createShader(const std::string& filePath);
 	private:
 	};
 

@@ -118,36 +118,14 @@ public:
 			m_squareColor = glm::vec3(0.2f, 0.3f, 0.8f);
 
 		}
-		{
-			std::string vertexSource_texture = R"(
-				#version 330 core
-				layout(location=0) in vec3 a_Position;
-				layout(location=1) in vec2 a_TextCoord;
-				out vec2 v_TextCoord;
-				uniform mat4 m_viewProjection;
-				uniform mat4 m_transform;
-				void main(){
-					v_TextCoord = a_TextCoord;
-					gl_Position = m_viewProjection*m_transform*vec4(a_Position,1.0);
-				}
-			)";
+		
 
-			std::string fragmentSource_texture = R"(
-				#version 330 core
-				layout(location=0) out vec4 color;
-				in vec2 v_TextCoord;
-				uniform sampler2D u_Texture;
-				void main() {
-					color = texture(u_Texture,v_TextCoord);
-				}
-			)";
+		m_Shader_Texture.reset(reder::shader::createShader("assets/shaderfiles/texture.glsl"));
+		m_texture = reder::texture2D::createTexture("assets/4.jpg");
 
-			m_Shader_Texture = std::shared_ptr<reder::shader>(reder::shader::createShader(vertexSource_texture, fragmentSource_texture));
-			m_texture = reder::texture2D::createTexture("assets/4.jpg");
-
-			std::dynamic_pointer_cast<reder::openglShader>(m_Shader_Texture)->bind();
-			std::dynamic_pointer_cast<reder::openglShader>(m_Shader_Texture)->uploadUniformInt("u_Texture", 0);
-		}
+		std::dynamic_pointer_cast<reder::openglShader>(m_Shader_Texture)->bind();
+		std::dynamic_pointer_cast<reder::openglShader>(m_Shader_Texture)->uploadUniformInt("u_Texture", 0);
+		
 	}
 
 	virtual void imguiRender() override {
@@ -219,6 +197,7 @@ private:
 
 
 	std::shared_ptr<reder::shader> m_Shader_Texture;
+	std::shared_ptr<reder::shader> m_Shader_Test;
 	reder::ref<reder::texture2D> m_texture;
 
 	float rotation=0.0f;

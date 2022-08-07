@@ -20,6 +20,7 @@ precompile header file
 #include <unordered_map>
 #include <unordered_set>
 #include <vector>
+#include <fstream>
 
 #ifdef RE_PLATFORM_WINDOWS
 	#include <Windows.h>
