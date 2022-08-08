@@ -12,9 +12,9 @@ namespace reder {
 		renderCommand::init();
 	}
 
-	void renderer::beginScene(const std::shared_ptr<orthographicCamera>& oC)
+	void renderer::beginScene(orthographicCamera& oC)
 	{
-		m_sceneData->viewProjectionMatrix = oC->getViewProjectionMatrix();
+		m_sceneData->viewProjectionMatrix = oC.getViewProjectionMatrix();
 	}
 	void renderer::endScene()
 	{

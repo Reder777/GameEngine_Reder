@@ -1383,7 +1383,7 @@
     <ClInclude Include="src\reder\renderer\grahpicsContext.h">
       <Filter>src\reder\renderer</Filter>
     </ClInclude>
-    <ClInclude Include="src\reder\renderer\orthpgraphicCamera.h">
+    <ClInclude Include="src\reder\renderer\orthographicCamera.h">
       <Filter>src\reder\renderer</Filter>
     </ClInclude>
     <ClInclude Include="src\reder\renderer\renderCommand.h">
@@ -1409,6 +1409,7 @@
     </ClInclude>
     <ClInclude Include="src\reder\renderer\texture.h" />
     <ClInclude Include="src\platform\openGL\openglTexture.h" />
+    <ClInclude Include="src\reder\core\orthographicCameraController.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="modules\stb\stb_image.cpp">
@@ -1456,7 +1457,7 @@
     <ClCompile Include="src\reder\renderer\buffers.cpp">
       <Filter>src\reder\renderer</Filter>
     </ClCompile>
-    <ClCompile Include="src\reder\renderer\orthpgraphicCamera.cpp">
+    <ClCompile Include="src\reder\renderer\orthographicCamera.cpp">
       <Filter>src\reder\renderer</Filter>
     </ClCompile>
     <ClCompile Include="src\reder\renderer\renderCommand.cpp">
@@ -1479,5 +1480,6 @@
     </ClCompile>
     <ClCompile Include="src\reder\renderer\texture.cpp" />
     <ClCompile Include="src\platform\openGL\openglTexture.cpp" />
+    <ClCompile Include="src\reder\core\orthographicCameraController.cpp" />
   </ItemGroup>
 </Project>

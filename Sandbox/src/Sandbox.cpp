@@ -15,59 +15,14 @@ class exampleLayer :public reder::layer {
 public:
 
 	exampleLayer()
-		:layer("example")
+		:layer("example"),m_cameraController(1280.0f/780.0f,true)
 	{
-
-		//char buffer[MAX_PATH];
-		//getcwd(buffer, MAX_PATH);
-		//RE_CLIENT_INFO(buffer);
-
 		m_shaderLibrary.reset(new reder::shaderLibrary());
-		m_camera.reset(new reder::orthographicCamera(-1.6f, 1.6f, 0.9f, -0.9f));
-		{
-			m_vertexArray = std::shared_ptr<reder::vertexArray>(reder::vertexArray::create());
-			m_vertexArray->bind();
-			float vertices[3 * 3] = {
-				-0.5f, -0.75f, 0.0f,
-				 0.5f, -0.75f, 0.0f,
-				 0.0f,  0.75f, 0.0f
-			};
-			std::shared_ptr<reder::vertexBuffer> vertexBuffer;
-			vertexBuffer.reset(reder::vertexBuffer::create(vertices, sizeof(vertices)));
-
-			reder::bufferLayout layout = {
-				{reder::bufferElementType::Float3 , "a_Position"}
-			};
-			vertexBuffer->setLayout(layout);
-			m_vertexArray->addVertexBuffer(vertexBuffer);
-
-
-			unsigned int indices[3] = { 0, 1, 2 };
-			std::shared_ptr<reder::indexBuffer> indexBuffer;
-			indexBuffer.reset((reder::indexBuffer::create(indices, 3)));
-			m_vertexArray->setIndexBuffer(indexBuffer);
-			std::string vertexSource = R"(
-			#version 330 core
-			layout(location=0) in vec3 a_position;
-			out vec3 forfun ;
-			uniform mat4 m_viewProjection;
-			uniform mat4 m_transform;
-			void main(){
-				forfun = a_position;
-				gl_Position = m_viewProjection*m_transform*vec4(a_position,1.0);
-			}		
-		)";
-
-			std::string fragmentSource = R"(
-			#version 330 core
-			layout(location=0) out vec4 color;
-			in vec3 forfun;
-			void main() {
-				color = vec4(forfun*0.5+0.5, 1.0);
-			}
-		)";
-
-		}
+		RE_CLIENT_INFO("{0}  {1}  {2}",
+			m_cameraController.getCurrentCamera().getPosition().x,
+			m_cameraController.getCurrentCamera().getPosition().y,
+			m_cameraController.getCurrentCamera().getPosition().z
+			);
 		{
 			m_vertexArray_square = std::shared_ptr<reder::vertexArray>(reder::vertexArray::create());
 			m_vertexArray_square->bind();
@@ -94,32 +49,11 @@ public:
 			std::shared_ptr<reder::indexBuffer> indexBufferSquare;
 			indexBufferSquare.reset((reder::indexBuffer::create(indices_square, 6)));
 			m_vertexArray_square->setIndexBuffer(indexBufferSquare);
-			std::string vertexSource_square = R"(
-				#version 330 core
-				layout(location=0) in vec3 a_Position;
-				uniform mat4 m_viewProjection;
-				uniform mat4 m_transform;
-				void main(){
-					gl_Position = m_viewProjection*m_transform*vec4(a_Position,1.0);
-				}		
-			)";
-
-			std::string fragmentSource_square = R"(
-				#version 330 core
-				layout(location=0) out vec4 color;
-				uniform vec3 m_color;
-				void main() {
-					color = vec4( m_color, 1.0);
-				}
-			)";
-			m_squareColor = glm::vec3(0.2f, 0.3f, 0.8f);
-
 		}
 		
 
-		m_shaderLibrary->loadShader("fragment","assets/shaderfiles/fragment.glsl");
-
-		m_shaderLibrary->loadShader("assets/shaderfiles/texture.glsl");
+		m_Shader_square=m_shaderLibrary->loadShader("fragment","assets/shaderfiles/fragment.glsl");
+		m_Shader_Texture=m_shaderLibrary->loadShader("assets/shaderfiles/texture.glsl");
 		m_texture = reder::texture2D::createTexture("assets/4.jpg");
 
 		auto m_Shader_Texture = m_shaderLibrary->getByName("texture");
@@ -135,19 +69,14 @@ public:
 	}
 
 	void onUpdate(reder::timeStamp t) override {
+		m_cameraController.onUpdate(t);
 
 		reder::renderCommand::clearColor({ 0.1f, 0.1f, 0.1f, 1 });
 		reder::renderCommand::clear();
-		m_camera->setPostion(camera_position);
-		m_camera->setRotation(rotation);
-		//RE_CLIENT_INFO("{0}", t.getMillSeconds());
-		//static glm::vec4 blueColor(0.2f, 0.3f, 0.8f,1.0f);
-		//static glm::vec4 redColor(0.8f, 0.3f, 0.2f,1.0f);
-		auto m_Shader_square = m_shaderLibrary->getByName("fragment");
-		auto m_Shader_Texture = m_shaderLibrary->getByName("texture");
+		reder::renderer::beginScene(m_cameraController.getCurrentCamera());
+		
 		std::dynamic_pointer_cast<reder::openglShader>(m_Shader_square)->bind();
 		std::dynamic_pointer_cast<reder::openglShader>(m_Shader_square)->uploadUniformFloat3("m_color", m_squareColor);
-		reder::renderer::beginScene(m_camera);
 		for (int i = 0; i < 10; i++) {
 			for (int j = 0; j < 10; j++) {
 				glm::vec3 v = glm::vec3(i * 1.1f, j*1.1f, 0.0f);
@@ -157,52 +86,22 @@ public:
 		}
 		m_texture->bind();
 		reder::renderer::submit(m_Shader_Texture, m_vertexArray_square, glm::scale(glm::mat4(1.0f), glm::vec3(1.5f)));
-		//reder::renderer::submit(m_Shader, m_vertexArray);
 		reder::renderer::endScene();
 
-		if (reder::input::isKeyPressed(RE_KEY_LEFT)) {
-			camera_position.x += position_speed*t;
-		}
-		else if (reder::input::isKeyPressed(RE_KEY_RIGHT)) {
-			camera_position.x -= position_speed*t;
-		}
-
-		if (reder::input::isKeyPressed(RE_KEY_UP)) {
-			camera_position.y -= position_speed*t;
-		}
-		else if (reder::input::isKeyPressed(RE_KEY_DOWN)) {
-			camera_position.y += position_speed*t;
-		}
-
-		if (reder::input::isKeyPressed(RE_KEY_A)) {
-			rotation -= rotation_speed*t;
-		}
-		else if (reder::input::isKeyPressed(RE_KEY_D)) {
-			rotation += rotation_speed*t;
-		}
 	}	
 	void onEvent(reder::event& e) override {
-
+		m_cameraController.onEvent(e);
 	}
 
 private:
-	std::shared_ptr<reder::orthographicCamera> m_camera;
-
+	reder::orthographicCameraController m_cameraController;
 	std::shared_ptr<reder::vertexArray> m_vertexArray;
 	std::shared_ptr<reder::vertexArray> m_vertexArray_square;
-
+	std::shared_ptr<reder::shader> m_Shader_square, m_Shader_Texture;
 	reder::ref<reder::texture2D> m_texture;
-
-	float rotation=0.0f;
-	glm::vec3 camera_position = { 0.0f,0.0f,0.0f };
-
-	float rotation_speed = 10.0f;
-	float position_speed = 1.0f;
-
-
 	glm::mat4 transform=glm::mat4(1.0f);
 	const glm::mat4 identityMatrix = glm::mat4(1.0f);
-	glm::vec3 m_squareColor;
+	glm::vec3 m_squareColor = {0.2f,0.8,0.3f};
 
 	reder::ref<reder::shaderLibrary> m_shaderLibrary;
 };

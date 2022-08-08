@@ -27,7 +27,6 @@ namespace reder {
 	{
 		m_name = pathToName(filePath);
 		std::string source = readFile(filePath);
-		RE_CORE_INFO(source);
 		auto shaderSources = preProcess(source);
 		compile(shaderSources);
 	}
@@ -36,7 +35,6 @@ namespace reder {
 		:m_name(name)
 	{
 		std::string source = readFile(filePath);
-		RE_CORE_INFO(source);
 		auto shaderSources = preProcess(source);
 		compile(shaderSources);
 	}

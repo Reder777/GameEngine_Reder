@@ -1,13 +1,20 @@
 #include "repch.h"
-#include "orthpgraphicCamera.h"
+#include "orthographicCamera.h"
 
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 
 namespace reder {
 	orthographicCamera::orthographicCamera(float left, float right, float top, float bottom)
-		:m_projectionMatrix(glm::ortho(left,right,bottom,top,-1.0f,1.0f)),m_viewMatrix(1.0f)
+		: m_viewMatrix(1.0f)
 	{
+		m_projectionMatrix = glm::ortho(left, right, bottom, top, -1.0f, 1.0f);
+		m_viewProjectionMatrix = m_projectionMatrix * m_viewMatrix;
+	}
+
+	void orthographicCamera::setProjection(float left, float right, float top, float bottom)
+	{
+		m_projectionMatrix = glm::ortho(left, right, bottom, top, -1.0f, 1.0f);
 		m_viewProjectionMatrix = m_projectionMatrix * m_viewMatrix;
 	}
 

@@ -9,7 +9,7 @@
 #include "reder/renderer/shader.h"
 #include "reder/renderer/buffers.h"
 #include "reder/renderer/vertexArray.h"
-#include "reder/renderer/orthpgraphicCamera.h"
+#include "reder/renderer/orthographicCamera.h"
 
 
 namespace reder{

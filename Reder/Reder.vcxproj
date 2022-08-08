@@ -526,6 +526,7 @@
     <ClInclude Include="src\reder\codesDef\keyCodes.h" />
     <ClInclude Include="src\reder\codesDef\mouseButton.h" />
     <ClInclude Include="src\reder\core.h" />
+    <ClInclude Include="src\reder\core\orthographicCameraController.h" />
     <ClInclude Include="src\reder\core\timeStamp.h" />
     <ClInclude Include="src\reder\entryPoint.h" />
     <ClInclude Include="src\reder\event\appEvent.h" />
@@ -540,7 +541,7 @@
     <ClInclude Include="src\reder\log.h" />
     <ClInclude Include="src\reder\renderer\buffers.h" />
     <ClInclude Include="src\reder\renderer\grahpicsContext.h" />
-    <ClInclude Include="src\reder\renderer\orthpgraphicCamera.h" />
+    <ClInclude Include="src\reder\renderer\orthographicCamera.h" />
     <ClInclude Include="src\reder\renderer\renderCommand.h" />
     <ClInclude Include="src\reder\renderer\renderer.h" />
     <ClInclude Include="src\reder\renderer\rendererAPI.h" />
@@ -561,13 +562,14 @@
     <ClCompile Include="src\platform\windows\windowsInput.cpp" />
     <ClCompile Include="src\platform\windows\windowsWindow.cpp" />
     <ClCompile Include="src\reder\application.cpp" />
+    <ClCompile Include="src\reder\core\orthographicCameraController.cpp" />
     <ClCompile Include="src\reder\imgui\imguiBuild.cpp" />
     <ClCompile Include="src\reder\imgui\imguiLayer.cpp" />
     <ClCompile Include="src\reder\layer.cpp" />
     <ClCompile Include="src\reder\layerStack.cpp" />
     <ClCompile Include="src\reder\log.cpp" />
     <ClCompile Include="src\reder\renderer\buffers.cpp" />
-    <ClCompile Include="src\reder\renderer\orthpgraphicCamera.cpp" />
+    <ClCompile Include="src\reder\renderer\orthographicCamera.cpp" />
     <ClCompile Include="src\reder\renderer\renderCommand.cpp" />
     <ClCompile Include="src\reder\renderer\renderer.cpp" />
     <ClCompile Include="src\reder\renderer\rendererAPI.cpp" />

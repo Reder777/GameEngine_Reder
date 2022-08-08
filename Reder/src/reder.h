@@ -36,17 +36,18 @@ all reference and library be used by actual sandbox
 #include "reder/renderer/buffers.h"
 #include "reder/renderer/shader.h"
 #include "reder/renderer/renderer.h"
-#include "reder/renderer/orthpgraphicCamera.h"
+#include "reder/renderer/orthographicCamera.h"
 #include "reder/renderer/grahpicsContext.h"
 #include "reder/renderer/vertexArray.h"
 #include "reder/renderer/renderCommand.h"
 #include "reder/renderer/texture.h"
+/*
+---------------------------------------------------------------------------
+*/
+#include "reder/core/orthographicCameraController.h"
 
 /*
 ---------------entry point ------------------------------------------------
 */
 #include "reder/entryPoint.h"
-
-
-
 #include <stdio.h>
