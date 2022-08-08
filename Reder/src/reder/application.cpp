@@ -47,14 +47,17 @@ namespace reder {
 
 
 		while (m_Running) {
-
-			float currentTime = (float)glfwGetTime();//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-			//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!to be rewrited
+			/*
+			* to be rewrited!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+			*/
+			float currentTime = (float)glfwGetTime();
 			timeStamp t = currentTime - m_lastFrameTime;
 			m_lastFrameTime = currentTime;
 
-			for (layer* layer : m_layStack) {
-				layer->onUpdate(t);
+			if (!m_windowMinimized) {
+				for (layer* layer : m_layStack) {
+					layer->onUpdate(t);
+				}
 			}
 			m_imguiLayer->begin();
 			for (layer* layer : m_layStack) {
@@ -71,15 +74,28 @@ namespace reder {
 		m_Running = false;
 		return true;
 	}
+	bool application::windowResize(windowResizeEvent& e)
+	{
+		if (e.getWidth() == 0 || e.getHeight() == 0)
+		{
+			m_windowMinimized= true;
+			return false;
+		}
+
+		m_windowMinimized = false;
+		renderer::windowResize(e.getWidth(), e.getHeight());
+
+		return false;
+	}
 	/*
-		from the end of the layer stack ,send the events to it and check if handled
-		question is i dont know why from the bottom
-	
+	*   question:!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+	*	from the end of the layer stack ,send the events to it and check if handled
+	*	question is i dont know why from the bottom!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 	*/
 	void application::OnEvent(event& e) {
 		eventDispatcher m_eventDispatcher(e);
 		m_eventDispatcher.Dispatch<windowCloseEvent>(RE_BIND_EVENT(application::windowClose));
-
+		m_eventDispatcher.Dispatch<windowResizeEvent>(RE_BIND_EVENT(application::windowResize));
 		
 		for (auto it = m_layStack.end(); it != m_layStack.begin();) {
 			(*--it)->onEvent(e);

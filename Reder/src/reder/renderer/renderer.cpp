@@ -19,6 +19,10 @@ namespace reder {
 	void renderer::endScene()
 	{
 	}
+	void renderer::windowResize(uint32_t width, uint32_t height)
+	{
+		renderCommand::setViewport(0, 0, width, height);
+	}
 	void renderer::submit(const std::shared_ptr<shader>& s,const std::shared_ptr<vertexArray>& vA,const glm::mat4& transform)
 	{
 		s->bind();

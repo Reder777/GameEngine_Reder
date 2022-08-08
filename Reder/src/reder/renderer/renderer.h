@@ -12,6 +12,7 @@ namespace reder {
 		static void init();
 		static void beginScene(orthographicCamera& oC);
 		static void endScene();
+		static void windowResize(uint32_t width, uint32_t height);
 
 		static void submit(const std::shared_ptr<shader>& s, const std::shared_ptr<vertexArray>& vA, const glm::mat4& transform=glm::mat4(1.0f));
 		inline static renderGraphicsLibrary getGraphicsLibrary() {

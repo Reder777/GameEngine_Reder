@@ -39,14 +39,24 @@ namespace reder{
 	private:
 
 		bool windowClose(windowCloseEvent& e);
-
+		bool windowResize(windowResizeEvent& e);
 	private:
-		std::unique_ptr<window> m_Window;
-		imguiLayer* m_imguiLayer;
-		bool m_Running = true;
-		layerStack m_layStack;
-		float m_lastFrameTime = 0.0f;
 		static application* app_Instance;
+
+
+		std::unique_ptr<window> m_Window;
+		bool m_windowMinimized = false;
+
+
+		imguiLayer* m_imguiLayer;
+		layerStack m_layStack;
+
+
+		float m_lastFrameTime = 0.0f;
+
+
+		bool m_Running = true;
+
 	};
 
 	application* createSandbox();

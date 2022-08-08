@@ -20,4 +20,8 @@ namespace reder {
 	{
 		glDrawElements(GL_TRIANGLES, vA->getIndexBuffer()->getCount(), GL_UNSIGNED_INT, nullptr);
 	}
+	void openglRendererAPI::setViewport(uint32_t x, uint32_t y, uint32_t width, uint32_t height) const
+	{
+		glViewport(x, y, width, height);
+	}
 }

@@ -54,7 +54,6 @@ namespace reder {
 	{
 		zoomLevel -= e.getYOffset() * 0.5f;
 		zoomLevel = std::max(zoomLevel, 0.25f);
-		RE_CORE_INFO(zoomLevel);
 		transSpeed = zoomLevel;
 		current_Camera.setProjection(-m_aspectRatio * zoomLevel, m_aspectRatio * zoomLevel, zoomLevel, -zoomLevel);
 		return false;
