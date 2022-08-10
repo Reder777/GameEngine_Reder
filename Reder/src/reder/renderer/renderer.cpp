@@ -2,6 +2,7 @@
 #include "renderer.h"
 
 #include "platform/openGL/openglShader.h"
+#include "renderer2d.h"
 
 
 namespace reder {
@@ -10,6 +11,7 @@ namespace reder {
 	void renderer::init()
 	{
 		renderCommand::init();
+		renderer2d::init();
 	}
 
 	void renderer::beginScene(orthographicCamera& oC)

@@ -1,11 +1,11 @@
 #pragma once
-#include "core.h"
-#include "window.h"
-#include "event/windowEvent.h"
+#include "reder/core/core.h"
+#include "reder/core/window.h"
+#include "reder/core/layerStack.h"
+#include "reder/event/windowEvent.h"
 #include "reder/event/appEvent.h"
-#include "layerStack.h"
 
-#include "imgui/imguiLayer.h"
+#include "reder/imgui/imguiLayer.h"
 #include "reder/renderer/shader.h"
 #include "reder/renderer/buffers.h"
 #include "reder/renderer/vertexArray.h"
@@ -36,6 +36,10 @@ namespace reder{
 
 		inline static application& getApp() { return *app_Instance; }
 
+		inline bool getSolidView() const { return m_solidView; }
+
+		bool setSolidView(bool solidView) { m_solidView = solidView; }
+
 	private:
 
 		bool windowClose(windowCloseEvent& e);
@@ -53,9 +57,9 @@ namespace reder{
 
 
 		float m_lastFrameTime = 0.0f;
-
-
 		bool m_Running = true;
+
+		bool m_solidView=false;
 
 	};
 

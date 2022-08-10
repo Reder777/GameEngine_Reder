@@ -1,6 +1,6 @@
 #include "repch.h"
 #include "windowsWindow.h"
-#include "reder/log.h"
+#include "reder/core/log.h"
 #include "reder/event/appEvent.h"
 #include "reder/event/keyboardEvent.h"
 #include "reder/event/mouseEvent.h"

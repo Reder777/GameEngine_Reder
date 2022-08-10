@@ -2,6 +2,8 @@
 #include "imgui.h"
 
 #include "platform/openGL/openglShader.h"
+#include "reder/core/entryPoint.h"
+#include "sandbox2d.h"
 
 #include <glm/glm.hpp>
 #include <glm/gtc/type_ptr.hpp>
@@ -17,49 +19,45 @@ public:
 	exampleLayer()
 		:layer("example"),m_cameraController(1280.0f/780.0f,true)
 	{
-		m_shaderLibrary.reset(new reder::shaderLibrary());
-		RE_CLIENT_INFO("{0}  {1}  {2}",
-			m_cameraController.getCurrentCamera().getPosition().x,
-			m_cameraController.getCurrentCamera().getPosition().y,
-			m_cameraController.getCurrentCamera().getPosition().z
-			);
-		{
-			m_vertexArray_square = std::shared_ptr<reder::vertexArray>(reder::vertexArray::create());
-			m_vertexArray_square->bind();
-
-
-			float vertices_square[5 * 4] = {
-				-0.5f, -0.5f, 0.0f, 0.0f, 0.0f,
-				 0.5f, -0.5f, 0.0f, 1.0f, 0.0f,
-				 0.5f,  0.5f, 0.0f, 1.0f, 1.0f,
-				-0.5f,  0.5f, 0.0f, 0.0f, 1.0f
-			};
-			std::shared_ptr<reder::vertexBuffer> vertexBufferSquare;
-			vertexBufferSquare.reset(reder::vertexBuffer::create(vertices_square, sizeof(vertices_square)));
-
-			reder::bufferLayout layout_square = {
-				{reder::bufferElementType::Float3 , "a_Position"},
-				{reder::bufferElementType::Float2 , "a_TextCoord"}
-			};
-			vertexBufferSquare->setLayout(layout_square);
-			m_vertexArray_square->addVertexBuffer(vertexBufferSquare);
-
-
-			unsigned int indices_square[6] = { 0,1,2,2,3,0 };
-			std::shared_ptr<reder::indexBuffer> indexBufferSquare;
-			indexBufferSquare.reset((reder::indexBuffer::create(indices_square, 6)));
-			m_vertexArray_square->setIndexBuffer(indexBufferSquare);
-		}
 		
+	}
+	virtual void attach() override{
+		m_shaderLibrary.reset(new reder::shaderLibrary());
 
-		m_Shader_square=m_shaderLibrary->loadShader("fragment","assets/shaderfiles/fragment.glsl");
-		m_Shader_Texture=m_shaderLibrary->loadShader("assets/shaderfiles/texture.glsl");
+		m_vertexArray_square = std::shared_ptr<reder::vertexArray>(reder::vertexArray::create());
+		m_vertexArray_square->bind();
+
+
+		float vertices_square[5 * 4] = {
+			-0.5f, -0.5f, 0.0f, 0.0f, 0.0f,
+			 0.5f, -0.5f, 0.0f, 1.0f, 0.0f,
+			 0.5f,  0.5f, 0.0f, 1.0f, 1.0f,
+			-0.5f,  0.5f, 0.0f, 0.0f, 1.0f
+		};
+		std::shared_ptr<reder::vertexBuffer> vertexBufferSquare;
+		vertexBufferSquare.reset(reder::vertexBuffer::create(vertices_square, sizeof(vertices_square)));
+
+		reder::bufferLayout layout_square = {
+			{reder::bufferElementType::Float3 , "a_Position"},
+			{reder::bufferElementType::Float2 , "a_TextCoord"}
+		};
+		vertexBufferSquare->setLayout(layout_square);
+		m_vertexArray_square->addVertexBuffer(vertexBufferSquare);
+
+
+		unsigned int indices_square[6] = { 0,1,2,2,3,0 };
+		std::shared_ptr<reder::indexBuffer> indexBufferSquare;
+		indexBufferSquare.reset((reder::indexBuffer::create(indices_square, 6)));
+		m_vertexArray_square->setIndexBuffer(indexBufferSquare);
+
+
+		m_Shader_square = m_shaderLibrary->loadShader("fragment", "assets/shaderfiles/fragment.glsl");
+		m_Shader_Texture = m_shaderLibrary->loadShader("assets/shaderfiles/texture.glsl");
 		m_texture = reder::texture2D::createTexture("assets/4.jpg");
 
 		auto m_Shader_Texture = m_shaderLibrary->getByName("texture");
 		std::dynamic_pointer_cast<reder::openglShader>(m_Shader_Texture)->bind();
 		std::dynamic_pointer_cast<reder::openglShader>(m_Shader_Texture)->uploadUniformInt("u_Texture", 0);
-		
 	}
 
 	virtual void imguiRender() override {
@@ -112,13 +110,13 @@ class Sandbox :public reder::application {
 public:
 
 	Sandbox() {
-		pushLayer(new exampleLayer());
-
+		pushLayer(new sandbox2dLayer());
 	}
 
 	~Sandbox() {
 
 	}
+
 };
 
 

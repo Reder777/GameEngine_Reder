@@ -1,7 +1,7 @@
 #pragma once
 
 #include "reder/renderer/grahpicsContext.h"
-#include "reder/core.h"
+#include "reder/core/core.h"
 #include <GLFW/glfw3.h>
 
 

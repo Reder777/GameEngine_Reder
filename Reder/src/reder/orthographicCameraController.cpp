@@ -1,9 +1,9 @@
 #include "repch.h"
 #include "orthographicCameraController.h"
-#include "reder/input.h"
+#include "reder/core/input.h"
+#include "reder/core/log.h"
 #include "reder/codesDef/keyCodes.h"
 #include "reder/event/event.h"
-#include "reder/log.h"
 
 namespace reder {
 
@@ -60,8 +60,10 @@ namespace reder {
 	}
 	bool orthographicCameraController::resizeEvent(windowResizeEvent& e)
 	{
-		m_aspectRatio = (float)e.getWidth() / (float)e.getHeight();
-		current_Camera.setProjection(-m_aspectRatio * zoomLevel, m_aspectRatio * zoomLevel, zoomLevel, -zoomLevel);
+		if (!current_Camera.getSolidView()) {
+			m_aspectRatio = (float)e.getWidth() / (float)e.getHeight();
+			current_Camera.setProjection(-m_aspectRatio * zoomLevel, m_aspectRatio * zoomLevel, zoomLevel, -zoomLevel);
+		}
 		return false;
 	}
 }

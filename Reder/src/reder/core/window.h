@@ -1,7 +1,6 @@
 #pragma once
-#include "core.h"
-#include "event/event.h"
-#include "repch.h"
+#include "reder/core/core.h"
+#include "reder/event/event.h"
 namespace reder{
 
 	struct windowProp

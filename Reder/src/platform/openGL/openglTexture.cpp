@@ -2,7 +2,7 @@
 #include "openglTexture.h"
 #include "stb_image.h"
 #include "glad/glad.h"
-#include "reder/log.h"
+#include "reder/core/log.h"
 namespace reder {
 	openglTexture2D::openglTexture2D(const std::string& path)
 	{

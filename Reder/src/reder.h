@@ -4,19 +4,19 @@ sandbox must include "reder.h"
 all reference and library be used by actual sandbox
 */
 
-#include "reder/application.h"
-#include "reder/log.h"
-#include "reder/event/event.h"
-#include "reder/layer.h"
-#include "reder/imgui/imguiLayer.h"
-#include "reder/input.h"
+#include "reder/core/application.h"
+#include "reder/core/log.h"
+#include "reder/core/layer.h"
+#include "reder/core/input.h"
 #include "reder/core/timeStamp.h"
+#include "reder/imgui/imguiLayer.h"
 
 /*
 ---------------reder's event system ---------------------------------------
 */
 
 
+#include "reder/event/event.h"
 #include "reder/event/keyboardEvent.h"
 #include "reder/event/mouseEvent.h"
 #include "reder/event/appEvent.h"
@@ -41,13 +41,9 @@ all reference and library be used by actual sandbox
 #include "reder/renderer/vertexArray.h"
 #include "reder/renderer/renderCommand.h"
 #include "reder/renderer/texture.h"
+#include "reder/renderer/renderer2d.h"
 /*
 ---------------------------------------------------------------------------
 */
-#include "reder/core/orthographicCameraController.h"
-
-/*
----------------entry point ------------------------------------------------
-*/
-#include "reder/entryPoint.h"
+#include "reder/orthographicCameraController.h"
 #include <stdio.h>

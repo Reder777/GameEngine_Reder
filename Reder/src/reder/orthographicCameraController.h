@@ -3,7 +3,7 @@
 #include "reder/renderer/orthographicCamera.h"
 #include "reder/event/windowEvent.h"
 #include "reder/event/mouseEvent.h"
-#include "reder/core.h"
+#include "reder/core/core.h"
 
 #include <glm/glm.hpp>
 

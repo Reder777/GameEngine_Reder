@@ -1,6 +1,6 @@
 #pragma once
-#include "core.h"
-#include "layer.h"
+#include "reder/core/core.h"
+#include "reder/core/layer.h"
 
 namespace reder {
 	class DLL_API layerStack

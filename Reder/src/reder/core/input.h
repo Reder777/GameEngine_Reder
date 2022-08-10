@@ -1,6 +1,6 @@
 #pragma once
 
-#include "core.h"
+#include "reder/core/core.h"
 
 namespace reder {
 	class DLL_API input {

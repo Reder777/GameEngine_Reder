@@ -1,5 +1,5 @@
 #pragma once
-#include "core.h"
+#include "reder/core/core.h"
 #include "reder/event/event.h"
 #include "reder/core/timeStamp.h"
 

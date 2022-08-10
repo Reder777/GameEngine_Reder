@@ -92,6 +92,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\Sandbox.cpp" />
+    <ClCompile Include="src\sandbox2d.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Reder\Reder.vcxproj">
@@ -101,6 +102,9 @@
   <ItemGroup>
     <None Include="assets\shaderfiles\fragment.glsl" />
     <None Include="assets\shaderfiles\texture.glsl" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\sandbox2d.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

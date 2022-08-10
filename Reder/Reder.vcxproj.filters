@@ -1329,7 +1329,7 @@
     <ClInclude Include="src\reder.h">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="src\reder\application.h">
+    <ClInclude Include="src\reder\core\application.h">
       <Filter>src\reder</Filter>
     </ClInclude>
     <ClInclude Include="src\reder\codesDef\keyCodes.h">
@@ -1338,13 +1338,13 @@
     <ClInclude Include="src\reder\codesDef\mouseButton.h">
       <Filter>src\reder\codesDef</Filter>
     </ClInclude>
-    <ClInclude Include="src\reder\core.h">
+    <ClInclude Include="src\reder\core\core.h">
       <Filter>src\reder</Filter>
     </ClInclude>
     <ClInclude Include="src\reder\core\timeStamp.h">
       <Filter>src\reder\core</Filter>
     </ClInclude>
-    <ClInclude Include="src\reder\entryPoint.h">
+    <ClInclude Include="src\reder\core\entryPoint.h">
       <Filter>src\reder</Filter>
     </ClInclude>
     <ClInclude Include="src\reder\event\appEvent.h">
@@ -1365,16 +1365,16 @@
     <ClInclude Include="src\reder\imgui\imguiLayer.h">
       <Filter>src\reder\imgui</Filter>
     </ClInclude>
-    <ClInclude Include="src\reder\input.h">
+    <ClInclude Include="src\reder\core\input.h">
       <Filter>src\reder</Filter>
     </ClInclude>
-    <ClInclude Include="src\reder\layer.h">
+    <ClInclude Include="src\reder\core\layer.h">
       <Filter>src\reder</Filter>
     </ClInclude>
-    <ClInclude Include="src\reder\layerStack.h">
+    <ClInclude Include="src\reder\core\layerStack.h">
       <Filter>src\reder</Filter>
     </ClInclude>
-    <ClInclude Include="src\reder\log.h">
+    <ClInclude Include="src\reder\core\log.h">
       <Filter>src\reder</Filter>
     </ClInclude>
     <ClInclude Include="src\reder\renderer\buffers.h">
@@ -1401,7 +1401,7 @@
     <ClInclude Include="src\reder\renderer\vertexArray.h">
       <Filter>src\reder\renderer</Filter>
     </ClInclude>
-    <ClInclude Include="src\reder\window.h">
+    <ClInclude Include="src\reder\core\window.h">
       <Filter>src\reder</Filter>
     </ClInclude>
     <ClInclude Include="src\repch.h">
@@ -1409,7 +1409,8 @@
     </ClInclude>
     <ClInclude Include="src\reder\renderer\texture.h" />
     <ClInclude Include="src\platform\openGL\openglTexture.h" />
-    <ClInclude Include="src\reder\core\orthographicCameraController.h" />
+    <ClInclude Include="src\reder\orthographicCameraController.h" />
+    <ClInclude Include="src\reder\renderer\renderer2d.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="modules\stb\stb_image.cpp">
@@ -1436,7 +1437,7 @@
     <ClCompile Include="src\platform\windows\windowsWindow.cpp">
       <Filter>src\platform\windows</Filter>
     </ClCompile>
-    <ClCompile Include="src\reder\application.cpp">
+    <ClCompile Include="src\reder\core\application.cpp">
       <Filter>src\reder</Filter>
     </ClCompile>
     <ClCompile Include="src\reder\imgui\imguiBuild.cpp">
@@ -1445,13 +1446,13 @@
     <ClCompile Include="src\reder\imgui\imguiLayer.cpp">
       <Filter>src\reder\imgui</Filter>
     </ClCompile>
-    <ClCompile Include="src\reder\layer.cpp">
+    <ClCompile Include="src\reder\core\layer.cpp">
       <Filter>src\reder</Filter>
     </ClCompile>
-    <ClCompile Include="src\reder\layerStack.cpp">
+    <ClCompile Include="src\reder\core\layerStack.cpp">
       <Filter>src\reder</Filter>
     </ClCompile>
-    <ClCompile Include="src\reder\log.cpp">
+    <ClCompile Include="src\reder\core\log.cpp">
       <Filter>src\reder</Filter>
     </ClCompile>
     <ClCompile Include="src\reder\renderer\buffers.cpp">
@@ -1480,6 +1481,7 @@
     </ClCompile>
     <ClCompile Include="src\reder\renderer\texture.cpp" />
     <ClCompile Include="src\platform\openGL\openglTexture.cpp" />
-    <ClCompile Include="src\reder\core\orthographicCameraController.cpp" />
+    <ClCompile Include="src\reder\orthographicCameraController.cpp" />
+    <ClCompile Include="src\reder\renderer\renderer2d.cpp" />
   </ItemGroup>
 </Project>

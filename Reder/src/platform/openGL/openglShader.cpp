@@ -1,6 +1,6 @@
 #include "repch.h"
 #include "openglShader.h"
-#include "reder/log.h"
+#include "reder/core/log.h"
 #include "glad/glad.h"
 
 namespace reder {

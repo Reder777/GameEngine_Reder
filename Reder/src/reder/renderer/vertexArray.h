@@ -1,6 +1,6 @@
 #pragma once
 
-#include "reder/core.h"
+#include "reder/core/core.h"
 #include "reder/renderer/buffers.h"
 
 namespace reder {

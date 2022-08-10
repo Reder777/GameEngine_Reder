@@ -1,5 +1,5 @@
 #pragma once
-#include "reder/core.h"
+#include "reder/core/core.h"
 #include "reder/renderer/rendererAPI.h"
 #include <glm/glm.hpp>
 

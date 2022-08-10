@@ -2,7 +2,7 @@
 #include "application.h"
 
 
-#include "reder/log.h"
+#include "reder/core/log.h"
 #include "reder/core/timeStamp.h"
 #include "reder/renderer/renderCommand.h"
 #include "reder/renderer/renderer.h"
@@ -21,10 +21,10 @@
 
 namespace reder {
 	application* application::app_Instance = nullptr;
-	input* input::input_instance = new windowsInput();;
+	input* input::input_instance = new windowsInput();
 
-
-	application::application() {
+	application::application() 
+	{
 
 		RE_CORE_ASSERT(!app_Instance, "app already exists!");
 		app_Instance = this;
@@ -33,6 +33,7 @@ namespace reder {
 		//m_Window->setVSync(false);
 		m_Window->setEventCallback(RE_BIND_EVENT(application::OnEvent));
 
+		renderer::init();
 		m_imguiLayer = new imguiLayer();
 		pushOverLayer(m_imguiLayer);
 		
@@ -83,7 +84,9 @@ namespace reder {
 		}
 
 		m_windowMinimized = false;
-		renderer::windowResize(e.getWidth(), e.getHeight());
+		if (!m_solidView) {
+			renderer::windowResize(e.getWidth(), e.getHeight());
+		}
 
 		return false;
 	}
@@ -113,6 +116,7 @@ namespace reder {
 	void application::pushLayer(layer* layer) {
 		m_layStack.pushLayer(layer);
 		layer->attach();
+		RE_CORE_INFO("layer '{0}' push succeed!", layer->getName());
 	}
 
 	void application::pushOverLayer(layer* overlayer) {
