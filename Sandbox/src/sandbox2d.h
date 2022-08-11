@@ -22,5 +22,6 @@ private:
 	reder::ref<reder::shader> m_Shader;
 	glm::vec4 m_squareColor = { 0.2f,0.8,0.3f,1.0f };
 	reder::ref<reder::shaderLibrary> m_shaderLibrary;
+	reder::ref<reder::texture2D> texture;
 
 };

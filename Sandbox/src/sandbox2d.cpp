@@ -27,6 +27,8 @@ void sandbox2dLayer::onUpdate(reder::timeStamp t)
 	reder::renderCommand::clear();
 	reder::renderer2d::beginScene(m_cameraController.getCurrentCamera());
 	reder::renderer2d::drawQuad({ 0.0f,0.0f,0.0f }, { 1.0f,1.0f }, { 0.8f,0.3f,0.2f,1.0f });
+	reder::renderer2d::drawQuad({ 0.5f,0.5f,0.0f }, { 0.5f,0.5f }, { 0.3f,0.3f,0.8f,1.0f });
+	reder::renderer2d::drawQuad({ -0.5f,-0.5f,-0.1f }, { 10.5f,10.5f }, texture);
 	reder::renderer2d::endScene();
 }
 
@@ -39,33 +41,7 @@ void sandbox2dLayer::imguiRender()
 
 void sandbox2dLayer::attach()
 {
-	/*m_shaderLibrary.reset(new reder::shaderLibrary());
-
-	m_vertexArray = std::shared_ptr<reder::vertexArray>(reder::vertexArray::create());
-	m_vertexArray->bind();
-
-
-	float vertices_square[3 * 4] = {
-		-0.5f, -0.5f, 0.0f,
-		 0.5f, -0.5f, 0.0f,
-		 0.5f,  0.5f, 0.0f,
-		-0.5f,  0.5f, 0.0f
-	};
-	std::shared_ptr<reder::vertexBuffer> vertexBufferSquare;
-	vertexBufferSquare.reset(reder::vertexBuffer::create(vertices_square, sizeof(vertices_square)));
-
-	reder::bufferLayout layout_square = {
-		{reder::bufferElementType::Float3 , "a_Position"}
-	};
-	vertexBufferSquare->setLayout(layout_square);
-	m_vertexArray->addVertexBuffer(vertexBufferSquare);
-
-	unsigned int indices_square[6] = { 0,1,2,2,3,0 };
-	std::shared_ptr<reder::indexBuffer> indexBufferSquare;
-	indexBufferSquare.reset((reder::indexBuffer::create(indices_square, 6)));
-	m_vertexArray->setIndexBuffer(indexBufferSquare);
-
-	m_Shader = m_shaderLibrary->loadShader("fragment", "assets/shaderfiles/fragment.glsl");*/
+	texture = reder::texture2D::createTexture("assets/Checkerboard.png");
 }
 
 void sandbox2dLayer::detach()
