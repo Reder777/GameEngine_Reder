@@ -1411,6 +1411,7 @@
     <ClInclude Include="src\platform\openGL\openglTexture.h" />
     <ClInclude Include="src\reder\orthographicCameraController.h" />
     <ClInclude Include="src\reder\renderer\renderer2d.h" />
+    <ClInclude Include="src\reder\debug\instrumentor.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="modules\stb\stb_image.cpp">

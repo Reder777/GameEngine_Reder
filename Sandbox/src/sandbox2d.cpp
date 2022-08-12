@@ -21,15 +21,25 @@ void sandbox2dLayer::onEvent(reder::event& e)
 
 void sandbox2dLayer::onUpdate(reder::timeStamp t)
 {
-	m_cameraController.onUpdate(t);
+	RE_PROFILE_FUNCTION();
+	{
+		RE_PROFILE_SCOPE("cameracontroller-update");
+		m_cameraController.onUpdate(t);
+	}
 
-	reder::renderCommand::clearColor({ 0.1f, 0.1f, 0.1f, 1 });
-	reder::renderCommand::clear();
-	reder::renderer2d::beginScene(m_cameraController.getCurrentCamera());
-	reder::renderer2d::drawQuad({ 0.0f,0.0f,0.0f }, { 1.0f,1.0f }, { 0.8f,0.3f,0.2f,1.0f });
-	reder::renderer2d::drawQuad({ 0.5f,0.5f,0.0f }, { 0.5f,0.5f }, { 0.3f,0.3f,0.8f,1.0f });
-	reder::renderer2d::drawQuad({ -0.5f,-0.5f,-0.1f }, { 10.5f,10.5f }, texture);
-	reder::renderer2d::endScene();
+	{
+		RE_PROFILE_SCOPE("clear window");
+		reder::renderCommand::clearColor({ 0.1f, 0.1f, 0.1f, 1 });
+		reder::renderCommand::clear();
+	}
+	{
+		RE_PROFILE_SCOPE("render scene");
+		reder::renderer2d::beginScene(m_cameraController.getCurrentCamera());
+		reder::renderer2d::drawQuad({ 0.0f,0.0f,0.0f }, { 1.0f,1.0f }, { 0.8f,0.3f,0.2f,1.0f });
+		reder::renderer2d::drawQuad({ 0.5f,0.5f,0.0f }, { 0.5f,0.5f }, { 0.3f,0.3f,0.8f,1.0f });
+		reder::renderer2d::drawQuad({ -0.5f,-0.5f,-0.1f }, { 100.0f,100.0f }, texture);
+		reder::renderer2d::endScene();
+	}
 }
 
 void sandbox2dLayer::imguiRender()

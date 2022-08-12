@@ -526,6 +526,7 @@
     <ClInclude Include="src\reder\codesDef\keyCodes.h" />
     <ClInclude Include="src\reder\codesDef\mouseButton.h" />
     <ClInclude Include="src\reder\core\core.h" />
+    <ClInclude Include="src\reder\debug\instrumentor.h" />
     <ClInclude Include="src\reder\orthographicCameraController.h" />
     <ClInclude Include="src\reder\core\timeStamp.h" />
     <ClInclude Include="src\reder\core\entryPoint.h" />

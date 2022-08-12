@@ -22,6 +22,7 @@ precompile header file
 #include <vector>
 #include <fstream>
 #include <array>
+#include <reder/debug/instrumentor.h>
 
 #ifdef RE_PLATFORM_WINDOWS
 	#include <Windows.h>

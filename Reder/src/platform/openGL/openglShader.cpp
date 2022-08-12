@@ -108,6 +108,7 @@ namespace reder {
 		glUniform1i(location, value);
 	}
 
+
 	std::string openglShader::readFile(const std::string& filepath)
 	{
 		std::string result;

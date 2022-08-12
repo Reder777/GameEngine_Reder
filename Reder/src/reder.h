@@ -24,14 +24,14 @@ all reference and library be used by actual sandbox
 
 
 /*
----------------reder's own code def ---------------------------------------
+-----------------------------reder's own code def ---------------------------------------
 */
 
 #include "reder/codesDef/keyCodes.h"
 #include "reder/codesDef/mouseButton.h"
 
 /*
----------------renderer files ---------------------------------------------
+-----------------------------renderer files ---------------------------------------------
 */
 #include "reder/renderer/buffers.h"
 #include "reder/renderer/shader.h"
@@ -43,7 +43,13 @@ all reference and library be used by actual sandbox
 #include "reder/renderer/texture.h"
 #include "reder/renderer/renderer2d.h"
 /*
----------------------------------------------------------------------------
+-------------------------------profile---------------------------------------------------
+*/
+#include "reder/debug/instrumentor.h"
+
+
+/*
+-----------------------------------------------------------------------------------------
 */
 #include "reder/orthographicCameraController.h"
 #include <stdio.h>

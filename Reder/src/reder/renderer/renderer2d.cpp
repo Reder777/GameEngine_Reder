@@ -13,7 +13,6 @@ namespace reder {
 	struct Renderer2DStorage
 	{
 		ref<vertexArray> QuadVertexArray;
-		ref<shader> FlatColorShader;
 		ref<shader> textureShader;
 	};
 
@@ -44,7 +43,6 @@ namespace reder {
 		squareIB.reset(indexBuffer::create(squareIndices, sizeof(squareIndices) / sizeof(uint32_t)));
 		s_Data->QuadVertexArray->setIndexBuffer(squareIB);
 
-		s_Data->FlatColorShader = shader::createShader("assets/shaderfiles/fragment.glsl");
 		s_Data->textureShader = shader::createShader("assets/shaderfiles/texture.glsl");
 	}
 
@@ -55,10 +53,9 @@ namespace reder {
 
 	void renderer2d::beginScene(const orthographicCamera& camera)
 	{
-		std::dynamic_pointer_cast<openglShader>(s_Data->FlatColorShader)->bind();
-		std::dynamic_pointer_cast<openglShader>(s_Data->FlatColorShader)->uploadUniformMat4("m_viewProjection", camera.getViewProjectionMatrix());
 		std::dynamic_pointer_cast<openglShader>(s_Data->textureShader)->bind();
 		std::dynamic_pointer_cast<openglShader>(s_Data->textureShader)->uploadUniformMat4("m_viewProjection", camera.getViewProjectionMatrix());
+		
 	}
 
 	void renderer2d::endScene()
@@ -73,12 +70,13 @@ namespace reder {
 
 	void renderer2d::drawQuad(const glm::vec3& position, const glm::vec2& size, const glm::vec4& color)
 	{
-		std::dynamic_pointer_cast<openglShader>(s_Data->FlatColorShader)->bind();
-		std::dynamic_pointer_cast<openglShader>(s_Data->FlatColorShader)->uploadUniformFloat4("u_Color", color);
+		std::dynamic_pointer_cast<openglShader>(s_Data->textureShader)->bind();
+		std::dynamic_pointer_cast<openglShader>(s_Data->textureShader)->uploadUniformFloat4("m_color", color);
+		std::dynamic_pointer_cast<openglShader>(s_Data->textureShader)->uploadUniformInt("hasTexture", false);
 
 		glm::mat4 transform = glm::translate(glm::mat4(1.0f), position) *
 							  glm::scale(glm::mat4(1.0f), { size.x,size.y,1.0f });
-		std::dynamic_pointer_cast<openglShader>(s_Data->FlatColorShader)->uploadUniformMat4("m_transform", transform);
+		std::dynamic_pointer_cast<openglShader>(s_Data->textureShader)->uploadUniformMat4("m_transform", transform);
 
 		s_Data->QuadVertexArray->bind();
 		renderCommand::drawIndex(s_Data->QuadVertexArray);
@@ -96,7 +94,7 @@ namespace reder {
 		glm::mat4 transform = glm::translate(glm::mat4(1.0f), position) *
 			glm::scale(glm::mat4(1.0f), { size.x,size.y,1.0f });
 		std::dynamic_pointer_cast<openglShader>(s_Data->textureShader)->uploadUniformMat4("m_transform", transform);
-
+		std::dynamic_pointer_cast<openglShader>(s_Data->textureShader)->uploadUniformInt("hasTexture", true);
 		texture->bind();
 		s_Data->QuadVertexArray->bind();
 		renderCommand::drawIndex(s_Data->QuadVertexArray);
