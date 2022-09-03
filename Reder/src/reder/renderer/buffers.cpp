@@ -20,6 +20,19 @@ namespace reder {
         return nullptr;
     }
 
+    vertexBuffer* vertexBuffer::create(RE_BUFFER_INT size)
+    {
+        switch (rendererAPI::getLibrary()) {
+        case renderGraphicsLibrary::None:
+            RE_CORE_ASSERT(false, "no render graphics library!");
+            break;
+        case renderGraphicsLibrary::Opengl:
+            return new openglVertexBuffer(size);
+        }
+        RE_CORE_ASSERT(false, "unknown graphics library!");
+        return nullptr;
+    }
+
 
 
     /*

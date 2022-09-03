@@ -122,7 +122,7 @@ namespace reder {
 	};
 }
 
-#define RE_PROFILE 1
+#define RE_PROFILE 0
 #if     RE_PROFILE
 #define RE_PROFILE_BEGIN_SESSION(name, filepath) ::reder::Instrumentor::Get().BeginSession(name, filepath)
 #define RE_PROFILE_END_SESSION() ::reder::Instrumentor::Get().EndSession()

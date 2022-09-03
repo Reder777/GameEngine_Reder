@@ -118,10 +118,12 @@ namespace reder {
 		virtual void bind() const = 0;
 		virtual void unbind() const = 0;
 
+		virtual void setData(const void* data, uint32_t size) = 0;
 		virtual const bufferLayout& getLayout() const = 0;
 		virtual void setLayout(const bufferLayout& layout) = 0;
 
 		static vertexBuffer* create(float* vertices, RE_BUFFER_INT size);
+		static vertexBuffer* create(RE_BUFFER_INT size);
 
 	
 	};

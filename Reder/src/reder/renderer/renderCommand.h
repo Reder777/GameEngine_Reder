@@ -18,8 +18,8 @@ namespace reder {
 			m_rendererAPI->clearColor(color);
 		}
 
-		inline static void drawIndex(const std::shared_ptr<vertexArray>& vA) {
-			m_rendererAPI->drawIndex(vA);
+		inline static void drawIndex(const std::shared_ptr<vertexArray>& vA , uint32_t count = 0 ) {
+			m_rendererAPI->drawIndex(vA , count);
 		}
 
 		static void setViewport(uint32_t x, uint32_t y, uint32_t width, uint32_t height);

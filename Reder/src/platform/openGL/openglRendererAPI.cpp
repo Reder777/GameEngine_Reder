@@ -18,9 +18,11 @@ namespace reder {
 	{
 		glClearColor(color.r, color.g, color.b, color.a);
 	}
-	void openglRendererAPI::drawIndex(const std::shared_ptr<vertexArray>& vA)
+	void openglRendererAPI::drawIndex(const std::shared_ptr<vertexArray>& vA,uint32_t count)
 	{
-		glDrawElements(GL_TRIANGLES, vA->getIndexBuffer()->getCount(), GL_UNSIGNED_INT, nullptr);
+		uint32_t dataCount = count ? vA->getIndexBuffer()->getCount() : count;
+		glDrawElements(GL_TRIANGLES, dataCount, GL_UNSIGNED_INT, nullptr);
+		//glBindTexture(GL_TEXTURE_2D, 0);
 	}
 	void openglRendererAPI::setViewport(uint32_t x, uint32_t y, uint32_t width, uint32_t height) const
 	{

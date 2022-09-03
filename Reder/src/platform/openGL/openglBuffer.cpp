@@ -4,6 +4,14 @@ namespace reder {
 	/*
 	-----------------------------opengl vertex buffer----------------------------
 	*/
+
+	openglVertexBuffer::openglVertexBuffer(uint32_t size)
+	{
+		glCreateBuffers(1, &m_VertexBufferId);
+		glBindBuffer(GL_ARRAY_BUFFER, m_VertexBufferId);
+		glBufferData(GL_ARRAY_BUFFER, size, nullptr, GL_DYNAMIC_DRAW);
+	}
+
 	openglVertexBuffer::openglVertexBuffer(float* vertices, RE_BUFFER_INT size)
 	{
 		glCreateBuffers(1, &m_VertexBufferId);
@@ -20,6 +28,11 @@ namespace reder {
 	void openglVertexBuffer::unbind() const
 	{
 		glBindBuffer(GL_ARRAY_BUFFER, 0);
+	}
+
+	void openglVertexBuffer::setData(const void* data, uint32_t size) {
+		glBindBuffer(GL_ARRAY_BUFFER, m_VertexBufferId);
+		glBufferSubData(GL_ARRAY_BUFFER, 0, size, data);
 	}
 
 	/*

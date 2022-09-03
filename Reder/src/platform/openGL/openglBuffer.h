@@ -12,10 +12,12 @@ namespace reder {
 
 	class DLL_API openglVertexBuffer :public vertexBuffer {
 	public:
+		openglVertexBuffer(uint32_t size);
 		openglVertexBuffer(float* vertices, RE_BUFFER_INT size);
 		virtual ~openglVertexBuffer();
 		virtual void bind() const override;
 		virtual void unbind() const override;
+		virtual void setData(const void* data, uint32_t size) override;
 
 		inline virtual const bufferLayout& getLayout() const override {
 			return m_bufferLayout;
