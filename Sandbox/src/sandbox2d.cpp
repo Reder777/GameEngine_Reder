@@ -35,9 +35,9 @@ void sandbox2dLayer::onUpdate(reder::timeStamp t)
 	{
 		RE_PROFILE_SCOPE("render scene");
 		reder::renderer2d::beginScene(m_cameraController.getCurrentCamera());
-		reder::renderer2d::drawQuad({ 0.0f,0.0f,0.0f }, { 1.0f,1.0f }, { 0.8f,0.3f,0.2f,1.0f });
+		reder::renderer2d::drawQuad({ 0.0f,0.0f,0.0f }, { 1.0f,1.0f }, { 1.0f,0.2f,0.2f,1.0f });
 		reder::renderer2d::drawQuad({ 1.5f,0.5f,0.0f }, { 0.5f,0.5f }, { 0.3f,0.3f,0.8f,1.0f });
-	/*	reder::renderer2d::drawQuad({ -0.5f,-0.5f,-0.1f }, { 100.0f,100.0f }, texture);*/
+		reder::renderer2d::drawQuad({ -0.5f,-0.5f,-0.1f }, { 10.0f,10.0f }, texture );
 		reder::renderer2d::endScene();
 	}
 }
@@ -56,4 +56,5 @@ void sandbox2dLayer::attach()
 
 void sandbox2dLayer::detach()
 {
+
 }

@@ -27,6 +27,7 @@ namespace reder {
 	{
 		m_name = pathToName(filePath);
 		std::string source = readFile(filePath);
+		std::cout << source;
 		auto shaderSources = preProcess(source);
 		compile(shaderSources);
 	}
@@ -61,6 +62,48 @@ namespace reder {
 	void openglShader::unbind() const
 	{
 		glUseProgram(0);
+	}
+
+
+
+	void openglShader::setInt(const std::string& name, const int value)
+	{
+		uploadUniformInt(name, value);
+	}
+
+	void openglShader::setFloat(const std::string& name, const float value)
+	{
+		uploadUniformFloat(name, value);
+	}
+
+	void openglShader::setFloat2(const std::string& name, const glm::vec2& value)
+	{
+		uploadUniformFloat2(name, value);
+	}
+
+	void openglShader::setFloat3(const std::string& name, const glm::vec3& value)
+	{
+		uploadUniformFloat3(name, value);
+	}
+
+	void openglShader::setFloat4(const std::string& name, const glm::vec4& value)
+	{
+		uploadUniformFloat4(name, value);
+	}
+
+	void openglShader::setMat3(const std::string& name, const glm::mat3& value)
+	{
+		uploadUniformMat3(name, value);
+	}
+
+	void openglShader::setMat4(const std::string& name, const glm::mat4& value)
+	{
+		uploadUniformMat4(name, value);
+	}
+
+	void openglShader::setIntArray(const std::string& name, int* value, uint32_t count)
+	{
+		uploadUniformIntArray(name, value, count);
 	}
 
 	/*
@@ -106,6 +149,12 @@ namespace reder {
 	{
 		GLint location = glGetUniformLocation(m_RendererId, name.c_str());
 		glUniform1i(location, value);
+	}
+
+	void openglShader::uploadUniformIntArray(const std::string& name, int* value, uint32_t count)
+	{
+		GLint location = glGetUniformLocation(m_RendererId, name.c_str());
+		glUniform1iv(location, count, value);
 	}
 
 

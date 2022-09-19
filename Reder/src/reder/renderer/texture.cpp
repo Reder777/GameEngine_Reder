@@ -17,4 +17,17 @@ namespace reder {
         RE_CORE_ASSERT(false, "texture2D : unknown graphics library!");
         return nullptr;
     }
+
+    ref<texture2D> texture2D::createTexture(const uint32_t width, const uint32_t height)
+    {
+        switch (rendererAPI::getLibrary()) {
+        case renderGraphicsLibrary::None:
+            RE_CORE_ASSERT(false, "texture2D : no render graphics library!");
+            break;
+        case renderGraphicsLibrary::Opengl:
+            return std::make_shared<openglTexture2D>(width,height);
+        }
+        RE_CORE_ASSERT(false, "texture2D : unknown graphics library!");
+        return nullptr;
+    }
 }

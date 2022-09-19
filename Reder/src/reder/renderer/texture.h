@@ -11,12 +11,14 @@ namespace reder {
 		virtual uint32_t getWidth() const = 0;
 
 		virtual void bind(uint32_t slot = 0) const = 0;	
+		virtual bool operator ==(const texture& other) const = 0;
+		virtual void setData(void* data, uint32_t size) = 0;
 	};
 
 	class texture2D : public texture
 	{
 	public:
 		static ref<texture2D> createTexture(const std::string& path);
-
+		static ref<texture2D> createTexture(const uint32_t width, const uint32_t height);
 	};
 }
