@@ -38,6 +38,8 @@ void sandbox2dLayer::onUpdate(reder::timeStamp t)
 		reder::renderer2d::drawQuad({ 0.0f,0.0f,0.0f }, { 1.0f,1.0f }, { 1.0f,0.2f,0.2f,1.0f });
 		reder::renderer2d::drawQuad({ 1.5f,0.5f,0.0f }, { 0.5f,0.5f }, { 0.3f,0.3f,0.8f,1.0f });
 		reder::renderer2d::drawQuad({ -0.5f,-0.5f,-0.1f }, { 10.0f,10.0f }, texture );
+		reder::renderer2d::drawQuadRotated({ 2.0f,2.0f,0.0f }, { 1.0f,1.0f }, { 1.0f,0.2f,0.2f,1.0f }, 45.0f);
+		reder::renderer2d::drawQuadRotated({ 3.0f,3.0f,0.0f }, { 1.0f,1.0f }, texture, 15.0f,10.0f);
 		reder::renderer2d::endScene();
 	}
 }
